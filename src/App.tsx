@@ -1,11 +1,11 @@
 import React from "react";
-
-import "./App.css";
+import "./styles/index.scss";
+import "./App.less";
 import AppRoute from "./routes/AppRoute";
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <AppRoute />
     </div>
   );
