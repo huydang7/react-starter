@@ -18,16 +18,7 @@ export interface AppRouteProps {
 
 const generateRoutes = (routes: RouteConfig[]): any[] => {
   const mainRoutes = routes.map(
-    ({
-      isPrivate,
-      layout,
-      path,
-      subRoutes,
-      children,
-      component,
-      render,
-      ...rest
-    }) => {
+    ({ isPrivate, layout, path, subRoutes, component, render, ...rest }) => {
       if (isPrivate)
         return [
           <PrivateRoute

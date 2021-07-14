@@ -8,7 +8,7 @@ export interface Props extends RouteProps {
 }
 
 export const PrivateRoute: React.FC<Props> = (props) => {
-  const { layout, children, component, render, ...rest } = props;
+  const { layout, component, render, ...rest } = props;
   const Layout = layout !== undefined ? layout : BlankLayout;
   const isLoggedIn = AuthService.isLoggedIn();
   const Component = component;
