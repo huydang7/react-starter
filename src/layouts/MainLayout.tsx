@@ -5,7 +5,7 @@ const MainLayout: React.FC = (props) => {
   return (
     <Layout>
       <Header>Header</Header>
-      <Content>{props.children}</Content>
+      <Content> {props.children}</Content>
     </Layout>
   );
 };

@@ -28,8 +28,6 @@ const generateRoutes = (routes: RouteConfig[]): any[] => {
       children,
       component,
       render,
-      authComponent,
-      authLayout,
       ...rest
     }) => {
       if (isPrivate)
@@ -38,7 +36,6 @@ const generateRoutes = (routes: RouteConfig[]): any[] => {
             layout={layout}
             path={path}
             component={component}
-            children={children}
             render={render}
             {...rest}
           />,
@@ -49,7 +46,6 @@ const generateRoutes = (routes: RouteConfig[]): any[] => {
           layout={layout}
           path={path}
           component={component}
-          children={children}
           render={render}
           {...rest}
         />,

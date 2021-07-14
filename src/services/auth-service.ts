@@ -1,6 +1,5 @@
 enum StorageKey {
   TOKEN = "token",
-  REFRESH_TOKEN = "refresh_token",
 }
 
 export const saveToken = (token: string) => {

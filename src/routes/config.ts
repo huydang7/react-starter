@@ -12,13 +12,14 @@ export const routes = [
     component: Home,
     layout: MainLayout,
     exact: true,
+    isPrivate: true,
   },
   {
     path: "/auth",
     component: NotFound,
     layout: BlankLayout,
     exact: true,
-    routes: [
+    subRoutes: [
       {
         path: "/auth/login",
         component: Login,

@@ -7,10 +7,10 @@ export interface Props extends RouteProps {
 }
 
 export const PublicRoute: React.FC<Props> = (props) => {
-  const { layout, component, location, render, ...rest } = props;
-
+  const { layout, children, component, render, ...rest } = props;
   const Layout = layout !== undefined ? layout : BlankLayout;
   const Component = component;
+
   return (
     <Route
       {...rest}

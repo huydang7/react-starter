@@ -1,35 +1,36 @@
 import React from "react";
-import { Redirect, RouteProps } from "react-router-dom";
+import { Redirect, Route, RouteProps } from "react-router-dom";
 import BlankLayout from "../layouts/BlankLayout";
 import * as AuthService from "../services/auth-service";
-import { PublicRoute } from "./PublicRoute";
 
 export interface Props extends RouteProps {
   layout: React.ComponentType;
 }
 
 export const PrivateRoute: React.FC<Props> = (props) => {
-  const isLoggedIn = AuthService.isLoggedIn();
-  const { layout, component, ...rest } = props;
-  const Component = component;
+  const { layout, children, component, render, ...rest } = props;
   const Layout = layout !== undefined ? layout : BlankLayout;
+  const isLoggedIn = AuthService.isLoggedIn();
+  const Component = component;
   return (
-    <Layout>
-      <PublicRoute
-        {...rest}
-        render={(props) => {
-          if (isLoggedIn) {
-            if (rest.render) {
-              return rest.render({ ...props });
-            } else if (Component) {
-              return <Component {...props} />;
-            } else {
-              return null;
-            }
-          }
-          return <Redirect to="/auth/login" />;
-        }}
-      />
-    </Layout>
+    <Route
+      {...rest}
+      render={(props) => {
+        return isLoggedIn ? (
+          render ? (
+            render({ ...props })
+          ) : (
+            <Layout>{Component ? <Component {...props} /> : null}</Layout>
+          )
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/auth/login",
+              state: { from: props.location },
+            }}
+          />
+        );
+      }}
+    />
   );
 };
