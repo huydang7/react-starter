@@ -10,8 +10,6 @@ export interface RouteConfig extends RouteProps {
   layout: any;
   subRoutes?: Array<RouteConfig>;
   isPrivate?: boolean;
-  authComponent?: any;
-  authLayout?: any;
 }
 
 export interface AppRouteProps {
