@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/index.scss";
-import "./App.less";
+import "./App.scss";
 import AppRoute from "./routes/AppRoute";
 
 function App() {

@@ -1,13 +1,7 @@
-import { Layout } from "antd";
-const { Header, Content } = Layout;
+import React from "react";
 
 const MainLayout: React.FC = (props) => {
-  return (
-    <Layout>
-      <Header>Header</Header>
-      <Content> {props.children}</Content>
-    </Layout>
-  );
+  return <div>{props.children}</div>;
 };
 
 export default MainLayout;
