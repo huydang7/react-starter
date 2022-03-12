@@ -1,55 +1,79 @@
 import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import { routes } from "./config";
-import { PrivateRoute } from "./PrivateRoute";
-import { PublicRoute } from "./PublicRoute";
+
 import { RouteProps } from "react-router-dom";
+import * as AuthService from "../services/auth-service";
+import BlankLayout from "../layouts/BlankLayout";
 
 export interface RouteConfig extends RouteProps {
   layout: any;
   subRoutes?: Array<RouteConfig>;
   isPrivate?: boolean;
+  component?: any;
 }
 
 export interface AppRouteProps {
   // routes: Array<RouteConfig>;
 }
 
-const generateRoutes = (routes: RouteConfig[]): any[] => {
+const RequireAuth = ({ children }: { children: JSX.Element }) => {
+  const isLoggedIn = AuthService.isLoggedIn();
+  let location = useLocation();
+  if (isLoggedIn) {
+    return <Navigate to="/auth/login" state={{ from: location }} replace />;
+  }
+
+  return children;
+};
+
+const generateRoutes = (routes: RouteConfig[]): any => {
   const mainRoutes = routes.map(
-    ({ isPrivate, layout, path, subRoutes, component, render, ...rest }) => {
+    ({ isPrivate, layout, subRoutes, component, ...rest }) => {
+      const Component = component;
+      const Layout = layout !== undefined ? layout : BlankLayout;
       if (isPrivate)
         return [
-          <PrivateRoute
-            layout={layout}
-            path={path}
-            component={component}
-            render={render}
+          <Route
+            element={
+              <RequireAuth>
+                <Layout>
+                  <Component />
+                </Layout>
+              </RequireAuth>
+            }
             {...rest}
           />,
           ...generateRoutes(subRoutes || []),
         ];
       return [
-        <PublicRoute
-          layout={layout}
-          path={path}
-          component={component}
-          render={render}
+        <Route
+          element={
+            <Layout>
+              <Component />
+            </Layout>
+          }
           {...rest}
         />,
         ...generateRoutes(subRoutes || []),
       ];
     }
   );
+
   return mainRoutes;
 };
 
 const AppRoute = () => {
   return (
-    <Router>
-      <Switch>{generateRoutes(routes)}</Switch>
-    </Router>
+    <BrowserRouter>
+      <Routes>{generateRoutes(routes)}</Routes>
+    </BrowserRouter>
   );
 };
 

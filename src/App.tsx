@@ -3,13 +3,18 @@ import "./styles/index.scss";
 import "./App.scss";
 import AppRoute from "./routes/AppRoute";
 import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./rematch/store";
 
 function App() {
   return (
     <div className="app">
-      <ChakraProvider>
-        <AppRoute />
-      </ChakraProvider>
+      <Provider store={store}>
+        <ChakraProvider>
+          <AppRoute />
+        </ChakraProvider>
+      </Provider>
     </div>
   );
 }
