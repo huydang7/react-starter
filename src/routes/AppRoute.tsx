@@ -6,11 +6,15 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-import { routes } from "./config";
+import { role, routes } from "./config";
 
 import { RouteProps } from "react-router-dom";
-import * as AuthService from "../services/auth-service";
+
 import BlankLayout from "../layouts/BlankLayout";
+import { useSelector } from "react-redux";
+import { RootState } from "../rematch/store";
+
+import useLoading from "../hooks/useLoading";
 
 export interface RouteConfig extends RouteProps {
   layout: any;
@@ -18,16 +22,24 @@ export interface RouteConfig extends RouteProps {
   isPrivate?: boolean;
   component?: any;
 }
-
 export interface AppRouteProps {
   // routes: Array<RouteConfig>;
 }
 
-const RequireAuth = ({ children }: { children: JSX.Element }) => {
-  const isLoggedIn = AuthService.isLoggedIn();
+const RequireAuth = ({
+  children,
+  ...rest
+}: {
+  children: JSX.Element;
+  roles?: role[];
+}) => {
+  const user: any = useSelector((state: RootState) => state.auth.user);
   let location = useLocation();
-  if (isLoggedIn) {
+  if (!user) {
     return <Navigate to="/auth/login" state={{ from: location }} replace />;
+  }
+  if (user?.role && rest?.roles && !rest?.roles?.includes(user?.role)) {
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 
   return children;
@@ -42,7 +54,7 @@ const generateRoutes = (routes: RouteConfig[]): any => {
         return [
           <Route
             element={
-              <RequireAuth>
+              <RequireAuth {...rest}>
                 <Layout>
                   <Component />
                 </Layout>
@@ -70,6 +82,15 @@ const generateRoutes = (routes: RouteConfig[]): any => {
 };
 
 const AppRoute = () => {
+  const getMeState = useLoading(
+    (state: RootState) => state.loading.effects.auth.getMe
+  );
+  const tokens = useSelector((state: RootState) => state.auth.tokens);
+
+  if (!getMeState.finished && tokens) {
+    return <></>;
+  }
+
   return (
     <BrowserRouter>
       <Routes>{generateRoutes(routes)}</Routes>

@@ -3,3 +3,67 @@
   justify-content: center;
   align-items: center;
 }
+
+$sizes: 1, 2, 3;
+
+@each $size in $sizes {
+  .m-#{$size} {
+    margin: #{$size}rem;
+  }
+  .mt-#{$size} {
+    margin-top: #{$size}rem;
+  }
+  .mb-#{$size} {
+    margin-bottom: #{$size}rem;
+  }
+  .ml-#{$size} {
+    margin-left: #{$size}rem;
+  }
+  .mr-#{$size} {
+    margin-right: #{$size}rem;
+  }
+  .my-#{$size} {
+    margin-top: #{$size}rem;
+    margin-bottom: #{$size}rem;
+  }
+  .mx-#{$size} {
+    margin-left: #{$size}rem;
+    margin-right: #{$size}rem;
+  }
+
+  .p-#{$size} {
+    padding: #{$size}rem;
+  }
+  .px-#{$size} {
+    padding-left: #{$size}rem;
+    padding-right: #{$size}rem;
+  }
+  .py-#{$size} {
+    padding-top: #{$size}rem;
+    padding-bottom: #{$size}rem;
+  }
+  .pt-#{$size} {
+    padding-top: #{$size}rem;
+  }
+  .pr-#{$size} {
+    padding-right: #{$size}rem;
+  }
+  .pb-#{$size} {
+    padding-bottom: #{$size}rem;
+  }
+  .pl-#{$size} {
+    padding-left: #{$size}rem;
+  }
+}
+
+$fontWeights: 100, 200, 300, 400, 500, 600, 700, 800, 900;
+
+@each $weight in $fontWeights {
+  .fw-#{$weight} {
+    font-weight: #{$weight};
+  }
+}
+
+.bold {
+  font-weight: bold;
+}

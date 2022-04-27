@@ -1,9 +1,11 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { store } from "../rematch/store";
 import * as AuthService from "./auth-service";
+import { configs } from "./config";
 
 const authWhiteListAPIs = ["/auth/login"];
 
-const checkRedirect = (reqUrl: string) => {
+const shouldRedirectFrom = (reqUrl: string) => {
   const isInWhiteList = authWhiteListAPIs.find((url: string) =>
     reqUrl.includes(url)
   );
@@ -13,7 +15,7 @@ const checkRedirect = (reqUrl: string) => {
 const requestAuthInterceptor = (
   req: AxiosRequestConfig
 ): AxiosRequestConfig => {
-  const token = AuthService.getToken();
+  const token = store.getState().auth.tokens?.access.token;
   if (token) {
     return {
       ...req,
@@ -29,7 +31,7 @@ const requestAuthInterceptor = (
 const responseRejectInterceptor = (res: any): AxiosResponse => {
   if (
     res.response?.status === 401 &&
-    !checkRedirect(res?.response?.config?.url)
+    !shouldRedirectFrom(res?.response?.config?.url)
   ) {
     AuthService.logOut();
   }
@@ -41,7 +43,7 @@ const responseFulfilledInterceptor = (res: any): AxiosResponse => {
 };
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_ENDPOINT,
+  baseURL: configs.apiURL,
 });
 
 instance.interceptors.request.use(requestAuthInterceptor);
