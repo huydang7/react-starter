@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from "react";
-import { Form, Input, Button, Spin } from "antd";
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "../../../rematch/store";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ReactComponent as MyLogo } from "../../../assets/imgs/logo_hoz.svg";
 import useLoading from "../../../hooks/useLoading";
