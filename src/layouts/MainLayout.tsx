@@ -8,7 +8,7 @@ import { Dispatch, RootState } from "../rematch/store";
 import { ReactComponent as MyLogo } from "../assets/imgs/logo_hoz.svg";
 
 const { Header, Content, Sider } = Layout;
-const MainLayout: React.FC = (props) => {
+const MainLayout = (props: any) => {
   const dispatch = useDispatch<Dispatch>();
   const user: any = useSelector((state: RootState) => state.auth.user);
 

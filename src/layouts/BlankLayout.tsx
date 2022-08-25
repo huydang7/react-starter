@@ -1,6 +1,6 @@
 import React from "react";
 
-const BlankLayout: React.FC = (props) => {
+const BlankLayout = (props: any) => {
   return <div>{props.children}</div>;
 };
 
