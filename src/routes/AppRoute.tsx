@@ -1,17 +1,16 @@
-import React from "react";
 import {
   BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
   Navigate,
+  Route,
+  Routes,
+  useLocation,
 } from "react-router-dom";
 import { role, routes } from "./config";
 
 import { RouteProps } from "react-router-dom";
 
-import BlankLayout from "../layouts/BlankLayout";
 import { useSelector } from "react-redux";
+import BlankLayout from "../layouts/BlankLayout";
 import { RootState } from "../rematch/store";
 
 import useLoading from "../hooks/useLoading";

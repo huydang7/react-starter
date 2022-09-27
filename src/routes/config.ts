@@ -54,6 +54,7 @@ export const routes = [
     ],
   },
   {
+    path: "*",
     component: NotFound,
   },
 ] as Array<RouteConfig>;

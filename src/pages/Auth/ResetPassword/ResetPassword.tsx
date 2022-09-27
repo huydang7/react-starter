@@ -1,12 +1,10 @@
-import React from "react";
-import { Form, Input, Button } from "antd";
 import { LockOutlined } from "@ant-design/icons";
+import { Button, Form, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "../../../rematch/store";
-import { Navigate, useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { ReactComponent as MyLogo } from "../../../assets/imgs/logo_hoz.svg";
+import { Link, Navigate, useLocation } from "react-router-dom";
+import Logo from "../../../components/Logo";
 import useLoading from "../../../hooks/useLoading";
+import { Dispatch, RootState } from "../../../rematch/store";
 
 const ResetPassword = () => {
   const dispatch = useDispatch<Dispatch>();
@@ -32,7 +30,7 @@ const ResetPassword = () => {
   return (
     <Form initialValues={{ remember: true }} onFinish={onFinish}>
       <div className="flex-center">
-        <MyLogo height={100} style={{ marginBottom: 36 }} />
+        <Logo />
       </div>
       <Form.Item
         name="password"

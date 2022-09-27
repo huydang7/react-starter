@@ -1,14 +1,13 @@
-import { Form, Input, Button } from "antd";
-import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "../../../rematch/store";
-import { Navigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { ReactComponent as MyLogo } from "../../../assets/imgs/logo_hoz.svg";
-import useLoading from "../../../hooks/useLoading";
+import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Form, Input } from "antd";
 import _ from "lodash";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
+import useLoading from "../../../hooks/useLoading";
+import { Dispatch, RootState } from "../../../rematch/store";
 
 import { useNavigate } from "react-router-dom";
+import Logo from "../../../components/Logo";
 
 const debounced = _.debounce((callback) => {
   return callback();
@@ -43,7 +42,7 @@ const Register = () => {
   return (
     <Form initialValues={{ remember: true }} onFinish={onFinish} form={form}>
       <div className="flex-center">
-        <MyLogo height={100} style={{ marginBottom: 36 }} />
+        <Logo />
       </div>
       <Form.Item
         name="name"
@@ -82,7 +81,6 @@ const Register = () => {
         ]}
       >
         <Input
-          // onChange={(e) => checkEmailDebounce(e.target.value)}
           style={{ width: 240 }}
           size="large"
           prefix={<MailOutlined className="site-form-item-icon" />}

@@ -1,14 +1,13 @@
-import React from "react";
-import "./styles/index.scss";
-import "./App.less";
-import AppRoute from "./routes/AppRoute";
-import { Provider } from "react-redux";
-import { store } from "./rematch/store";
-import InitState from "./containers/InitState";
-import ErrorBoundary from "./containers/ErrorBoundary";
-import "moment/locale/vi";
 import { getPersistor } from "@rematch/persist";
+import "moment/locale/vi";
+import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
+import "./App.less";
+import ErrorBoundary from "./containers/ErrorBoundary";
+import InitState from "./containers/InitState";
+import { store } from "./rematch/store";
+import AppRoute from "./routes/AppRoute";
+import "./styles/index.scss";
 
 const persistor = getPersistor();
 

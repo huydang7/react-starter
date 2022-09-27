@@ -1,17 +1,14 @@
-import React from "react";
-import { Form, Input, Button, Tag } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "../../../rematch/store";
-import { Navigate, useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { ReactComponent as MyLogo } from "../../../assets/imgs/logo_hoz.svg";
+import { Link, Navigate, useLocation } from "react-router-dom";
+import Logo from "../../../components/Logo";
 import useLoading from "../../../hooks/useLoading";
+import { Dispatch, RootState } from "../../../rematch/store";
 
 const Login = () => {
   const dispatch = useDispatch<Dispatch>();
 
-  // get params in url
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const isRegisterSuccess = params.get("register") === "success";
@@ -34,7 +31,7 @@ const Login = () => {
   return (
     <Form initialValues={{ remember: true }} onFinish={onFinish}>
       <div className="flex-center">
-        <MyLogo height={100} style={{ marginBottom: 36 }} />
+        <Logo />
       </div>
       {isRegisterSuccess && (
         <div className="flex-center mb-1">
