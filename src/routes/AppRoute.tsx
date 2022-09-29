@@ -5,7 +5,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import { role, routes } from "./config";
+import { Role, routes } from "./config";
 
 import { RouteProps } from "react-router-dom";
 
@@ -30,7 +30,7 @@ const RequireAuth = ({
   ...rest
 }: {
   children: JSX.Element;
-  roles?: role[];
+  roles?: Role[];
 }) => {
   const user: any = useSelector((state: RootState) => state.auth.user);
   let location = useLocation();
