@@ -15,12 +15,12 @@ import { RootState } from "../rematch/store";
 
 import useLoading from "../hooks/useLoading";
 
-export interface RouteConfig extends RouteProps {
+export type RouteConfig = {
   layout: any;
   subRoutes?: Array<RouteConfig>;
   isPrivate?: boolean;
   component?: any;
-}
+} & RouteProps;
 export interface AppRouteProps {
   // routes: Array<RouteConfig>;
 }
