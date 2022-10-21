@@ -7,7 +7,7 @@ const AuthLayout = (props: any) => {
       <div
         style={{
           backgroundColor: "white",
-          padding: 52,
+          padding: 36,
           borderRadius: 4,
           maxWidth: 540,
         }}
