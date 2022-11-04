@@ -9,7 +9,7 @@ const shouldRedirectFrom = (reqUrl: string) => {
   const isInWhiteList = authWhiteListAPIs.find((url: string) =>
     reqUrl.includes(url)
   );
-  return !!isInWhiteList;
+  return !isInWhiteList;
 };
 
 const requestAuthInterceptor = (
@@ -31,7 +31,7 @@ const requestAuthInterceptor = (
 const responseRejectInterceptor = (res: any): AxiosResponse => {
   if (
     res.response?.status === 401 &&
-    !shouldRedirectFrom(res?.response?.config?.url)
+    shouldRedirectFrom(res?.response?.config?.url)
   ) {
     AuthService.logOut();
   }
