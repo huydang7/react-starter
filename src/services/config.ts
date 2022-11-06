@@ -1,3 +1,3 @@
 export const configs = {
-  apiURL: `${process.env.REACT_APP_BASE_API_URL}/api`,
+  apiURL: `${import.meta.env.VITE_BASE_API_URL}/api`,
 };
