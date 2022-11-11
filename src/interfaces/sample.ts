@@ -1,8 +1,8 @@
-import { ITimestamp } from './base';
+import { ITimestamp } from "./base";
 
 export enum SampleType {
-  NORMAL = 'NORMAL',
-  CUSTOM = 'CUSTOM',
+  NORMAL = "NORMAL",
+  CUSTOM = "CUSTOM",
 }
 
 export interface ISample extends ITimestamp {

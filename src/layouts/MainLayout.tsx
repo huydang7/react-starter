@@ -3,7 +3,7 @@ import { Layout, Menu, Button, Dropdown } from "antd";
 import { useAuthStore } from "../stores/auth";
 import { ReactComponent as MyLogo } from "../assets/imgs/logo_hoz.svg";
 import { useNavigate } from "react-router-dom";
-import { Role } from "../routes/config";
+import { Role } from "../interfaces/user";
 
 const { Header, Content, Sider } = Layout;
 
@@ -21,7 +21,7 @@ const MainLayout = (props: any) => {
   const renderMenu = () => {
     let items: any = [];
     configs.forEach((e, i) => {
-      if (e.roles.includes(currentUser?.role)) {
+      if (e.roles.includes(currentUser?.role!)) {
         items.push({
           label: e.title,
           key: i,

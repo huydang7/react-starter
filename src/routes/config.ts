@@ -8,11 +8,6 @@ import NotFound from "../pages/Error/404";
 import Home from "../pages/Home";
 import { RouteConfig } from "./AppRoute";
 
-export enum Role {
-  ADMIN = "ADMIN",
-  USER = "USER",
-}
-
 export const routes = [
   {
     path: "/",

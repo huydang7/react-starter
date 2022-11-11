@@ -4,15 +4,14 @@ import {
   Route,
   Routes,
   useLocation,
+  RouteProps,
 } from "react-router-dom";
-import { Role, routes } from "./config";
-
-import { RouteProps } from "react-router-dom";
-
+import { routes } from "./config";
 import BlankLayout from "../layouts/BlankLayout";
 import { useAuthStore } from "../stores/auth";
 import { useQueryGetMe } from "../hooks/useAuth";
 import LoadingScreen from "../components/LoadingScreen";
+import { Role } from "../interfaces/user";
 
 export type RouteConfig = {
   layout: any;
