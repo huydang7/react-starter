@@ -26,7 +26,7 @@ const useHydration = () => {
 };
 
 const InitState = () => {
-  const tokens = useAuthStore().tokens;
+  const { tokens } = useAuthStore();
   const getMe = useQueryGetMe();
   const hyrated = useHydration();
 
@@ -34,7 +34,8 @@ const InitState = () => {
     if (tokens && hyrated) {
       getMe.refetch();
     }
-  }, [getMe, tokens, hyrated]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tokens, hyrated]);
 
   if (!hyrated) {
     return <LoadingScreen />;

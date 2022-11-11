@@ -80,10 +80,10 @@ const generateRoutes = (routes: RouteConfig[]): any => {
 };
 
 const AppRoute = () => {
-  const { isFetched } = useQueryGetMe();
+  const { isLoading } = useQueryGetMe();
   const tokens = useAuthStore().tokens;
 
-  if (!isFetched && tokens) {
+  if (isLoading && tokens) {
     return <LoadingScreen />;
   }
 
