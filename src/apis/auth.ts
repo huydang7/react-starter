@@ -13,7 +13,7 @@ export const getMe = () => {
 };
 
 export const checkEmail = (payload: any) => {
-  return request.post("/v1/auth/email", payload);
+  return request.post("/v1/auth/check-email", payload);
 };
 
 export const forgotPassword = (payload: any) => {

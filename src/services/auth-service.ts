@@ -1,5 +1,5 @@
-import { store } from "../rematch/store";
+import { useAuthStore } from "../stores/auth";
 
 export const logOut = () => {
-  store.dispatch.auth.logOut();
+  useAuthStore.getState().logOut();
 };

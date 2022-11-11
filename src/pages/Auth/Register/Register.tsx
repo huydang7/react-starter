@@ -1,26 +1,28 @@
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import _ from "lodash";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import useLoading from "../../../hooks/useLoading";
-import { Dispatch, RootState } from "../../../rematch/store";
-
 import { useNavigate } from "react-router-dom";
 import Logo from "../../../components/Logo";
+import {
+  useCheckEmailMutation,
+  useRegisterMutation,
+} from "../../../hooks/useAuth";
+import { useAuthStore } from "../../../stores/auth";
 
 const debounced = _.debounce((callback) => {
   return callback();
 }, 500);
 
 const Register = () => {
-  const dispatch = useDispatch<Dispatch>();
   const navigate = useNavigate();
-
+  const { mutate, isLoading } = useRegisterMutation();
+  const checkEmailMutation = useCheckEmailMutation();
   const onFinish = async (values: any) => {
-    dispatch.auth.register({
+    mutate({
       ...values,
       cb: (res: any) => {
+        console.log("useRegisterMutation", res);
         if (res) {
           navigate("/auth/login?register=success&email=" + values.email);
         }
@@ -30,10 +32,26 @@ const Register = () => {
 
   const [form] = Form.useForm();
 
-  const user = useSelector((state: RootState) => state.auth.user);
-  const { loading } = useLoading(
-    (state: RootState) => state.loading.effects.auth.register
-  );
+  const user = useAuthStore().currentUser;
+
+  const handleEmailChanged = (e: string) => {
+    debounced(() =>
+      checkEmailMutation.mutate({
+        email: e,
+        cb: (res: any) => {
+          if (res) {
+            const currentErrors = form.getFieldError("email");
+            form.setFields([
+              {
+                name: "email",
+                errors: [...currentErrors, "Email đã được sử dụng"],
+              },
+            ]);
+          }
+        },
+      })
+    );
+  };
 
   if (user) {
     return <Navigate to="/" />;
@@ -60,24 +78,6 @@ const Register = () => {
         rules={[
           { required: true, message: "Vui lòng không để trống email" },
           { type: "email", message: "Định dạng email không đúng" },
-          {
-            validator: async (rule, value) => {
-              return new Promise<any>((resolve, reject) => {
-                debounced(() =>
-                  dispatch.auth.checkEmail({
-                    email: value,
-                    cb: (res: any) => {
-                      if (res) {
-                        reject("Email đã tồn tại");
-                      } else {
-                        resolve(true);
-                      }
-                    },
-                  })
-                );
-              });
-            },
-          },
         ]}
       >
         <Input
@@ -85,6 +85,9 @@ const Register = () => {
           size="large"
           prefix={<MailOutlined className="site-form-item-icon" />}
           placeholder="Email"
+          onChange={(e) => {
+            handleEmailChanged(e.target.value);
+          }}
         />
       </Form.Item>
       <Form.Item
@@ -97,11 +100,16 @@ const Register = () => {
             message: "Mật khẩu phải có ít nhất 8 ký tự",
           },
           {
-            validator: (rule, value) => {
-              if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-                Promise.reject("Mật khẩu phải có ít nhất 1 chữ và một số");
+            validator: async (rule, value) => {
+              if (!value) {
+                return await Promise.resolve();
               }
-              return Promise.resolve();
+              if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+                return await Promise.reject(
+                  "Mật khẩu phải có ít nhất 1 chữ và một số"
+                );
+              }
+              return await Promise.resolve();
             },
           },
         ]}
@@ -116,7 +124,7 @@ const Register = () => {
       </Form.Item>
       <Form.Item>
         <Button
-          loading={loading}
+          loading={isLoading}
           size="large"
           type="primary"
           htmlType="submit"

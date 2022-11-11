@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { store } from "../rematch/store";
+import { useAuthStore } from "../stores/auth";
+
 import * as AuthService from "./auth-service";
 import { configs } from "./config";
 
@@ -15,7 +16,7 @@ const shouldRedirectFrom = (reqUrl: string) => {
 const requestAuthInterceptor = (
   req: AxiosRequestConfig
 ): AxiosRequestConfig => {
-  const token = store.getState().auth.tokens?.access.token;
+  const token = useAuthStore.getState().tokens?.access.token;
   if (token) {
     return {
       ...req,

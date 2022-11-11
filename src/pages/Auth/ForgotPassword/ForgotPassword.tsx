@@ -1,27 +1,22 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Row } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import Logo from "../../../components/Logo";
-import useLoading from "../../../hooks/useLoading";
-import { Dispatch, RootState } from "../../../rematch/store";
+import { useForgotPasswordMutation } from "../../../hooks/useAuth";
+import { useAuthStore } from "../../../stores/auth";
 
 const ForgotPassword = () => {
-  const dispatch = useDispatch<Dispatch>();
-
   const location = useLocation();
   const params = new URLSearchParams(location.search);
 
   const email = params.get("email");
+  const { mutate, isSuccess, isError, isLoading } = useForgotPasswordMutation();
 
   const onFinish = (values: any) => {
-    dispatch.auth.forgotPassword(values);
+    mutate(values);
   };
 
-  const user = useSelector((state: RootState) => state.auth.user);
-  const { loading, finished, success, error } = useLoading(
-    (state: RootState) => state.loading.effects.auth.forgotPassword
-  );
+  const user = useAuthStore().currentUser;
 
   if (user) {
     return <Navigate to="/" />;
@@ -33,7 +28,7 @@ const ForgotPassword = () => {
         <Logo />
       </div>
 
-      {finished && success ? (
+      {isSuccess ? (
         <Row>
           <span>
             Một thư đặt lại mật khẩu vừa được gửi tới địa chỉ email của bạn. Vui
@@ -57,7 +52,7 @@ const ForgotPassword = () => {
               placeholder="Email"
             />
           </Form.Item>
-          {finished && error && (
+          {isError && (
             <Row>
               <span style={{ color: "red", fontSize: 12, width: "100%" }}>
                 Không tìm thấy người dùng
@@ -66,7 +61,7 @@ const ForgotPassword = () => {
           )}
           <Form.Item>
             <Button
-              loading={loading}
+              loading={isLoading}
               size="large"
               type="primary"
               htmlType="submit"

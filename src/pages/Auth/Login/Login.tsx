@@ -1,29 +1,24 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Tag } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import Logo from "../../../components/Logo";
-import useLoading from "../../../hooks/useLoading";
-import { Dispatch, RootState } from "../../../rematch/store";
+import { useLoginMutation } from "../../../hooks/useAuth";
+import { useAuthStore } from "../../../stores/auth";
 
 const Login = () => {
-  const dispatch = useDispatch<Dispatch>();
-
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const isRegisterSuccess = params.get("register") === "success";
   const isResetPwdSuccess = params.get("isResetPwdSuccess") === "true";
 
   const email = params.get("email");
+  const { mutate, isLoading, isError } = useLoginMutation();
 
   const onFinish = (values: any) => {
-    dispatch.auth.login(values);
+    mutate(values);
   };
 
-  const user = useSelector((state: RootState) => state.auth.user);
-  const { finished, loading, error } = useLoading(
-    (state: RootState) => state.loading.effects.auth.login
-  );
+  const user = useAuthStore().currentUser;
 
   if (user) {
     return <Navigate to="/" />;
@@ -73,7 +68,7 @@ const Login = () => {
           placeholder="Mật khẩu"
         />
       </Form.Item>
-      {error && finished && (
+      {isError && (
         <span style={{ color: "red", fontSize: 12 }}>
           Email hoặc mật khẩu không đúng
         </span>
@@ -85,7 +80,7 @@ const Login = () => {
       </Form.Item>
       <Form.Item>
         <Button
-          loading={loading}
+          loading={isLoading}
           size="large"
           type="primary"
           htmlType="submit"

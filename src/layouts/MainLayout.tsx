@@ -1,42 +1,40 @@
 import { DesktopOutlined } from "@ant-design/icons";
 import { Layout, Menu, Button, Dropdown } from "antd";
-
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Dispatch, RootState } from "../rematch/store";
+import { useAuthStore } from "../stores/auth";
 import { ReactComponent as MyLogo } from "../assets/imgs/logo_hoz.svg";
+import { useNavigate } from "react-router-dom";
+import { Role } from "../routes/config";
 
 const { Header, Content, Sider } = Layout;
-const MainLayout = (props: any) => {
-  const dispatch = useDispatch<Dispatch>();
-  const user: any = useSelector((state: RootState) => state.auth.user);
 
+const MainLayout = (props: any) => {
+  const { currentUser, logOut } = useAuthStore();
+  const navigate = useNavigate();
   const configs = [
     {
       path: "/",
       title: "Quản lí tài khoản",
       icon: <DesktopOutlined />,
-      roles: ["admin"],
+      roles: [Role.ADMIN],
     },
   ];
   const renderMenu = () => {
-    return configs.map((e, i) =>
-      e.roles.includes(user?.role) ? (
-        <Menu.Item key={i} icon={e.icon}>
-          <Link to={e.path}>{e.title}</Link>
-        </Menu.Item>
-      ) : (
-        <></>
-      )
-    );
+    let items: any = [];
+    configs.forEach((e, i) => {
+      if (e.roles.includes(currentUser?.role)) {
+        items.push({
+          label: e.title,
+          key: i,
+          icon: e.icon,
+          onClick: () => navigate(e.path),
+        });
+      }
+    });
+    return items;
   };
+
   const menu = (
-    <Menu>
-      <Menu.Item key={"logout"} onClick={() => dispatch.auth.logOut()}>
-        Đăng xuất
-      </Menu.Item>
-    </Menu>
+    <Menu items={[{ label: "Đăng xuất", key: 1, onClick: () => logOut() }]} />
   );
   return (
     <Layout>
@@ -54,7 +52,7 @@ const MainLayout = (props: any) => {
         <div className="flex-center" style={{ height: 150 }}>
           <MyLogo width={80} />
         </div>
-        <Menu style={{ borderRight: 0, marginTop: 20 }}>{renderMenu()}</Menu>
+        <Menu style={{ borderRight: 0, marginTop: 20 }} items={renderMenu()} />
       </Sider>
       <Layout style={{ marginLeft: 200 }}>
         <Header
@@ -80,7 +78,7 @@ const MainLayout = (props: any) => {
               shape="round"
               style={{ backgroundColor: "rgba(0, 0, 0, 0.030)" }}
             >
-              <span> Xin chào, {user?.name} </span>
+              <span> Xin chào, {currentUser?.name} </span>
             </Button>
           </Dropdown>
         </Header>

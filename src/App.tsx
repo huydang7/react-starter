@@ -1,28 +1,22 @@
-import { getPersistor } from "@rematch/persist";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "moment/locale/vi";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/lib/integration/react";
 import "./App.less";
 import ErrorBoundary from "./containers/ErrorBoundary";
 import InitState from "./containers/InitState";
-import { store } from "./rematch/store";
 import AppRoute from "./routes/AppRoute";
 import "./styles/index.scss";
-
-const persistor = getPersistor();
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <PersistGate persistor={persistor}>
-      <div className="app">
+    <div className="app">
+      <QueryClientProvider client={queryClient}>
         <ErrorBoundary>
-          <Provider store={store}>
-            <InitState />
-            <AppRoute />
-          </Provider>
+          <InitState />
+          <AppRoute />
         </ErrorBoundary>
-      </div>
-    </PersistGate>
+      </QueryClientProvider>
+    </div>
   );
 }
 

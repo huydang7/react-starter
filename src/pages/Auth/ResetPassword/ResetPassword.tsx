@@ -1,27 +1,24 @@
 import { LockOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import Logo from "../../../components/Logo";
-import useLoading from "../../../hooks/useLoading";
-import { Dispatch, RootState } from "../../../rematch/store";
+import { useResetPasswordMutation } from "../../../hooks/useAuth";
+import { useAuthStore } from "../../../stores/auth";
 
 const ResetPassword = () => {
-  const dispatch = useDispatch<Dispatch>();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const token = params.get("token");
 
+  const { mutate, isLoading, isError, isSuccess } = useResetPasswordMutation();
   const onFinish = (values: any) => {
     delete values.newPassword;
-    dispatch.auth.resetPassword({ ...values, token });
+    mutate({ ...values, token });
   };
 
-  const user = useSelector((state: RootState) => state.auth.user);
-  const { loading, error, success, finished } = useLoading(
-    (state: RootState) => state.loading.effects.auth.resetPassword
-  );
-  if (finished && success) {
+  const user = useAuthStore().currentUser;
+
+  if (isSuccess) {
     return <Navigate to="/auth/login?isResetPwdSuccess=true" />;
   }
   if (user) {
@@ -61,14 +58,14 @@ const ResetPassword = () => {
           placeholder="Mật khẩu mới"
         />
       </Form.Item>
-      {error && (
+      {isError && (
         <span style={{ color: "red", fontSize: 12 }}>
           Không thể đặt lại mật khẩu
         </span>
       )}
       <Form.Item>
         <Button
-          loading={loading}
+          loading={isLoading}
           size="large"
           type="primary"
           htmlType="submit"

@@ -9,11 +9,10 @@ import { Role, routes } from "./config";
 
 import { RouteProps } from "react-router-dom";
 
-import { useSelector } from "react-redux";
 import BlankLayout from "../layouts/BlankLayout";
-import { RootState } from "../rematch/store";
-
-import useLoading from "../hooks/useLoading";
+import { useAuthStore } from "../stores/auth";
+import { useQueryGetMe } from "../hooks/useAuth";
+import LoadingScreen from "../components/LoadingScreen";
 
 export type RouteConfig = {
   layout: any;
@@ -32,7 +31,7 @@ const RequireAuth = ({
   children: JSX.Element;
   roles?: Role[];
 }) => {
-  const user: any = useSelector((state: RootState) => state.auth.user);
+  const user = useAuthStore().currentUser;
   let location = useLocation();
   if (!user) {
     return <Navigate to="/auth/login" state={{ from: location }} replace />;
@@ -81,13 +80,11 @@ const generateRoutes = (routes: RouteConfig[]): any => {
 };
 
 const AppRoute = () => {
-  const getMeState = useLoading(
-    (state: RootState) => state.loading.effects.auth.getMe
-  );
-  const tokens = useSelector((state: RootState) => state.auth.tokens);
+  const { isFetched } = useQueryGetMe();
+  const tokens = useAuthStore().tokens;
 
-  if (!getMeState.finished && tokens) {
-    return <></>;
+  if (!isFetched && tokens) {
+    return <LoadingScreen />;
   }
 
   return (
