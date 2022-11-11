@@ -24,7 +24,11 @@ const Login = () => {
     return <Navigate to="/" />;
   }
   return (
-    <Form initialValues={{ remember: true }} onFinish={onFinish}>
+    <Form
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      style={{ width: 240 }}
+    >
       <div className="flex-center">
         <Logo />
       </div>
@@ -47,7 +51,6 @@ const Login = () => {
         ]}
       >
         <Input
-          style={{ width: 240 }}
           size="large"
           prefix={<UserOutlined className="site-form-item-icon" />}
           placeholder="Email"
@@ -61,7 +64,6 @@ const Login = () => {
         ]}
       >
         <Input
-          style={{ width: 240 }}
           size="large"
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"

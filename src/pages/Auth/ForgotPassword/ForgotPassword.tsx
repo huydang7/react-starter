@@ -23,7 +23,11 @@ const ForgotPassword = () => {
   }
 
   return (
-    <Form initialValues={{ remember: true }} onFinish={onFinish}>
+    <Form
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      style={{ width: 240 }}
+    >
       <div className="flex-center">
         <Logo />
       </div>
@@ -46,7 +50,6 @@ const ForgotPassword = () => {
             ]}
           >
             <Input
-              style={{ width: 240 }}
               size="large"
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Email"

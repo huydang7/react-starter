@@ -20,7 +20,6 @@ const configs = ({ mode }) => {
     // },
     server: {
       port: 8000,
-      hmr: true,
     },
     build: {
       outDir: "build",

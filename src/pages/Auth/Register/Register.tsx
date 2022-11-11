@@ -58,7 +58,12 @@ const Register = () => {
   }
 
   return (
-    <Form initialValues={{ remember: true }} onFinish={onFinish} form={form}>
+    <Form
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      form={form}
+      style={{ width: 240 }}
+    >
       <div className="flex-center">
         <Logo />
       </div>
@@ -67,7 +72,6 @@ const Register = () => {
         rules={[{ required: true, message: "Vui lòng không để trống tên" }]}
       >
         <Input
-          style={{ width: 240 }}
           size="large"
           prefix={<UserOutlined className="site-form-item-icon" />}
           placeholder="Họ tên"
@@ -81,7 +85,6 @@ const Register = () => {
         ]}
       >
         <Input
-          style={{ width: 240 }}
           size="large"
           prefix={<MailOutlined className="site-form-item-icon" />}
           placeholder="Email"
@@ -115,7 +118,6 @@ const Register = () => {
         ]}
       >
         <Input
-          style={{ width: 240 }}
           size="large"
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
