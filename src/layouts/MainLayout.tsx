@@ -21,7 +21,7 @@ const MainLayout = (props: any) => {
   const renderMenu = () => {
     let items: any = [];
     configs.forEach((e, i) => {
-      if (e.roles.includes(currentUser?.role!)) {
+      if (currentUser && e.roles.includes(currentUser.role)) {
         items.push({
           label: e.title,
           key: i,
