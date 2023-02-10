@@ -1,0 +1,11 @@
+$spacingSizes: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16;
+$fontWeights: 100, 200, 300, 400, 500, 600, 700, 800, 900;
+$primaryFont: "Poppins";
+
+@function getSpacingSize($size) {
+  @if $size >= 6 {
+    @return #{$size}px;
+  } @else {
+    @return #{$size}rem;
+  }
+}

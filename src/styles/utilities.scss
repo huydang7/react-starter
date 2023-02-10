@@ -1,0 +1,96 @@
+@each $spacingSize in $spacingSizes {
+  .m-#{$spacingSize} {
+    margin: getSpacingSize($spacingSize);
+  }
+  .mt-#{$spacingSize} {
+    margin-top: getSpacingSize($spacingSize);
+  }
+  .mb-#{$spacingSize} {
+    margin-bottom: getSpacingSize($spacingSize);
+  }
+  .ml-#{$spacingSize} {
+    margin-left: getSpacingSize($spacingSize);
+  }
+  .mr-#{$spacingSize} {
+    margin-right: getSpacingSize($spacingSize);
+  }
+  .my-#{$spacingSize} {
+    margin-top: getSpacingSize($spacingSize);
+    margin-bottom: getSpacingSize($spacingSize);
+  }
+  .mx-#{$spacingSize} {
+    margin-left: getSpacingSize($spacingSize);
+    margin-right: getSpacingSize($spacingSize);
+  }
+
+  .p-#{$spacingSize} {
+    padding: getSpacingSize($spacingSize);
+  }
+  .px-#{$spacingSize} {
+    padding-left: getSpacingSize($spacingSize);
+    padding-right: getSpacingSize($spacingSize);
+  }
+  .py-#{$spacingSize} {
+    padding-top: getSpacingSize($spacingSize);
+    padding-bottom: getSpacingSize($spacingSize);
+  }
+  .pt-#{$spacingSize} {
+    padding-top: getSpacingSize($spacingSize);
+  }
+  .pr-#{$spacingSize} {
+    padding-right: getSpacingSize($spacingSize);
+  }
+  .pb-#{$spacingSize} {
+    padding-bottom: getSpacingSize($spacingSize);
+  }
+  .pl-#{$spacingSize} {
+    padding-left: getSpacingSize($spacingSize);
+  }
+}
+
+@each $weight in $fontWeights {
+  .fw-#{$weight} {
+    font-weight: #{$weight};
+  }
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.justify-center {
+  justify-content: center;
+}
+.align-center {
+  align-items: center;
+}
+
+.flex-center {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
