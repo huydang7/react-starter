@@ -1,11 +1,11 @@
 import { DesktopOutlined, UserOutlined } from "@ant-design/icons";
 import { Layout, Menu, Button, Dropdown, Spin } from "antd";
 import { useAuthStore } from "stores/auth";
-import { ReactComponent as MyLogo } from "assets/imgs/logo_hoz.svg";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Role } from "interfaces/user";
 import { HeaderHeight, SiderWidth } from "shared/constants";
 import { Suspense } from "react";
+import Logo from "components/Logo";
 
 const { Header, Sider } = Layout;
 
@@ -57,7 +57,7 @@ const MainLayout = (props: any) => {
         }}
       >
         <div className="flex-center" style={{ height: 150 }}>
-          <MyLogo width={80} />
+          <Logo />
         </div>
         <Menu style={{ borderRight: 0, marginTop: 20 }} items={renderMenu()} />
       </Sider>

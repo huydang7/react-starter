@@ -1,8 +1,8 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Tag } from "antd";
 import { Link, Navigate, useLocation } from "react-router-dom";
-import { useLogin } from "../../../hooks/useAuth";
-import { useAuthStore } from "../../../stores/auth";
+import { useLogin } from "hooks/useAuth";
+import { useAuthStore } from "stores/auth";
 
 const Login = () => {
   const location = useLocation();

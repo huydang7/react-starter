@@ -1,8 +1,12 @@
+import { Typography } from "antd";
 import React from "react";
-import { ReactComponent as MyLogo } from "../assets/imgs/logo_hoz.svg";
 
 const Logo = () => {
-  return <MyLogo height={100} style={{ marginBottom: 36 }} />;
+  return (
+    <div className="mb-1">
+      <Typography.Title level={1}>Logo</Typography.Title>
+    </div>
+  );
 };
 
 export default Logo;
