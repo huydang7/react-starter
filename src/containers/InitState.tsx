@@ -1,4 +1,4 @@
-import { useQueryGetMe } from "hooks/useAuth";
+import { useGetMe } from "hooks/useAuth";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "stores/auth";
 import LoadingScreen from "components/LoadingScreen";
@@ -25,9 +25,9 @@ const useHydration = () => {
   return hydrated;
 };
 
-const InitState = () => {
+const InitState = (props: any) => {
   const { tokens } = useAuthStore();
-  const getMe = useQueryGetMe();
+  const getMe = useGetMe();
   const hydrated = useHydration();
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const InitState = () => {
   if (!hydrated) {
     return <LoadingScreen />;
   }
-  return <></>;
+  return <>{props?.children}</>;
 };
 
 export default InitState;

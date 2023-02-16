@@ -18,10 +18,11 @@ function App() {
       <ConfigProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <ErrorBoundary>
-            <InitState />
-            <BrowserRouter>
-              <AppRoute />
-            </BrowserRouter>
+            <InitState>
+              <BrowserRouter>
+                <AppRoute />
+              </BrowserRouter>
+            </InitState>
           </ErrorBoundary>
         </QueryClientProvider>
       </ConfigProvider>

@@ -1,60 +1,64 @@
-@each $spacingSize in $spacingSizes {
-  .m-#{$spacingSize} {
-    margin: getSpacingSize($spacingSize);
+@import "variables.scss";
+
+@each $spacing-size in $spacing-sizes {
+  .m-#{$spacing-size} {
+    margin: getSpacingSize($spacing-size);
   }
-  .mt-#{$spacingSize} {
-    margin-top: getSpacingSize($spacingSize);
+  .mt-#{$spacing-size} {
+    margin-top: getSpacingSize($spacing-size);
   }
-  .mb-#{$spacingSize} {
-    margin-bottom: getSpacingSize($spacingSize);
+  .mb-#{$spacing-size} {
+    margin-bottom: getSpacingSize($spacing-size);
   }
-  .ml-#{$spacingSize} {
-    margin-left: getSpacingSize($spacingSize);
+  .ml-#{$spacing-size} {
+    margin-left: getSpacingSize($spacing-size);
   }
-  .mr-#{$spacingSize} {
-    margin-right: getSpacingSize($spacingSize);
+  .mr-#{$spacing-size} {
+    margin-right: getSpacingSize($spacing-size);
   }
-  .my-#{$spacingSize} {
-    margin-top: getSpacingSize($spacingSize);
-    margin-bottom: getSpacingSize($spacingSize);
+  .my-#{$spacing-size} {
+    margin-top: getSpacingSize($spacing-size);
+    margin-bottom: getSpacingSize($spacing-size);
   }
-  .mx-#{$spacingSize} {
-    margin-left: getSpacingSize($spacingSize);
-    margin-right: getSpacingSize($spacingSize);
+  .mx-#{$spacing-size} {
+    margin-left: getSpacingSize($spacing-size);
+    margin-right: getSpacingSize($spacing-size);
   }
 
-  .p-#{$spacingSize} {
-    padding: getSpacingSize($spacingSize);
+  .p-#{$spacing-size} {
+    padding: getSpacingSize($spacing-size);
   }
-  .px-#{$spacingSize} {
-    padding-left: getSpacingSize($spacingSize);
-    padding-right: getSpacingSize($spacingSize);
+  .px-#{$spacing-size} {
+    padding-left: getSpacingSize($spacing-size);
+    padding-right: getSpacingSize($spacing-size);
   }
-  .py-#{$spacingSize} {
-    padding-top: getSpacingSize($spacingSize);
-    padding-bottom: getSpacingSize($spacingSize);
+  .py-#{$spacing-size} {
+    padding-top: getSpacingSize($spacing-size);
+    padding-bottom: getSpacingSize($spacing-size);
   }
-  .pt-#{$spacingSize} {
-    padding-top: getSpacingSize($spacingSize);
+  .pt-#{$spacing-size} {
+    padding-top: getSpacingSize($spacing-size);
   }
-  .pr-#{$spacingSize} {
-    padding-right: getSpacingSize($spacingSize);
+  .pr-#{$spacing-size} {
+    padding-right: getSpacingSize($spacing-size);
   }
-  .pb-#{$spacingSize} {
-    padding-bottom: getSpacingSize($spacingSize);
+  .pb-#{$spacing-size} {
+    padding-bottom: getSpacingSize($spacing-size);
   }
-  .pl-#{$spacingSize} {
-    padding-left: getSpacingSize($spacingSize);
+  .pl-#{$spacing-size} {
+    padding-left: getSpacingSize($spacing-size);
   }
 }
 
-@each $weight in $fontWeights {
+@each $weight in $font-weights {
   .fw-#{$weight} {
     font-weight: #{$weight};
   }
 }
 
-.d-flex {
+// follow tailwind syntax
+
+.flex {
   display: flex;
 }
 
@@ -69,7 +73,8 @@
 .justify-center {
   justify-content: center;
 }
-.align-center {
+
+.items-center {
   align-items: center;
 }
 
@@ -85,10 +90,6 @@
 
 .h-full {
   height: 100%;
-}
-
-.bold {
-  font-weight: bold;
 }
 
 .text-center {

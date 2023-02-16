@@ -1,6 +1,7 @@
-$spacingSizes: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16;
-$fontWeights: 100, 200, 300, 400, 500, 600, 700, 800, 900;
-$primaryFont: "Poppins";
+$spacing-sizes: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16;
+$font-weights: 100, 200, 300, 400, 500, 600, 700, 800, 900;
+$primary-font: "Poppins";
+$primary-color: #157dc5;
 
 @function getSpacingSize($size) {
   @if $size >= 6 {

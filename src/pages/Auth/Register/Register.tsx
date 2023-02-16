@@ -3,10 +3,7 @@ import { Button, Form, Input } from "antd";
 import _ from "lodash";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {
-  useCheckEmailMutation,
-  useRegisterMutation,
-} from "../../../hooks/useAuth";
+import { useCheckEmail, useRegister } from "../../../hooks/useAuth";
 import { useAuthStore } from "../../../stores/auth";
 
 const debounced = _.debounce((callback) => {
@@ -14,42 +11,32 @@ const debounced = _.debounce((callback) => {
 }, 500);
 
 const Register = () => {
+  const user = useAuthStore().currentUser;
   const navigate = useNavigate();
-  const { mutate, isLoading } = useRegisterMutation();
-  const checkEmailMutation = useCheckEmailMutation();
-  const onFinish = async (values: any) => {
-    mutate({
-      ...values,
-      cb: (res: any) => {
-        console.log("useRegisterMutation", res);
-        if (res) {
-          navigate("/auth/login?register=success&email=" + values.email);
-        }
-      },
-    });
-  };
-
+  const { mutateAsync, isLoading, isError } = useRegister();
+  const checkEmail = useCheckEmail();
   const [form] = Form.useForm();
 
-  const user = useAuthStore().currentUser;
+  const onFinish = async (values: any) => {
+    const result = await mutateAsync(values);
+    if (result) {
+      navigate(`/auth/login?isRegisterSuccess=true&email=${values.email}`);
+    }
+  };
 
   const handleEmailChanged = (e: string) => {
-    debounced(() =>
-      checkEmailMutation.mutate({
-        email: e,
-        cb: (res: any) => {
-          if (res) {
-            const currentErrors = form.getFieldError("email");
-            form.setFields([
-              {
-                name: "email",
-                errors: [...currentErrors, "Email đã được sử dụng"],
-              },
-            ]);
-          }
-        },
-      })
-    );
+    debounced(async () => {
+      const res = await checkEmail.mutateAsync(e);
+      if (res) {
+        const currentErrors = form.getFieldError("email");
+        form.setFields([
+          {
+            name: "email",
+            errors: [...currentErrors, "Email đã được sử dụng"],
+          },
+        ]);
+      }
+    });
   };
 
   if (user) {
@@ -117,6 +104,11 @@ const Register = () => {
           placeholder="Mật khẩu"
         />
       </Form.Item>
+      {isError && (
+        <span style={{ color: "#ff4d4f", fontSize: 12 }}>
+          Đăng ký không thành công
+        </span>
+      )}
       <Form.Item>
         <Button
           loading={isLoading}

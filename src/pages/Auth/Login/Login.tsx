@@ -1,17 +1,17 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Tag } from "antd";
 import { Link, Navigate, useLocation } from "react-router-dom";
-import { useLoginMutation } from "../../../hooks/useAuth";
+import { useLogin } from "../../../hooks/useAuth";
 import { useAuthStore } from "../../../stores/auth";
 
 const Login = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const isRegisterSuccess = params.get("register") === "success";
+  const isRegisterSuccess = params.get("isRegisterSuccess") === "true";
   const isResetPwdSuccess = params.get("isResetPwdSuccess") === "true";
 
   const email = params.get("email");
-  const { mutate, isLoading, isError } = useLoginMutation();
+  const { mutate, isLoading, isError } = useLogin();
 
   const onFinish = (values: any) => {
     mutate(values);

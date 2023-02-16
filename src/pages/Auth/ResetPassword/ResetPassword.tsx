@@ -1,7 +1,7 @@
 import { LockOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { Link, Navigate, useLocation } from "react-router-dom";
-import { useResetPasswordMutation } from "../../../hooks/useAuth";
+import { useResetPassword } from "../../../hooks/useAuth";
 import { useAuthStore } from "../../../stores/auth";
 
 const ResetPassword = () => {
@@ -9,7 +9,7 @@ const ResetPassword = () => {
   const params = new URLSearchParams(location.search);
   const token = params.get("token");
 
-  const { mutate, isLoading, isError, isSuccess } = useResetPasswordMutation();
+  const { mutate, isLoading, isError, isSuccess } = useResetPassword();
   const onFinish = (values: any) => {
     delete values.newPassword;
     mutate({ ...values, token });
@@ -23,6 +23,7 @@ const ResetPassword = () => {
   if (user) {
     return <Navigate to="/" />;
   }
+
   return (
     <Form
       initialValues={{ remember: true }}
