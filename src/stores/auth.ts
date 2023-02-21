@@ -1,5 +1,5 @@
 import produce from "immer";
-import create, { StateCreator } from "zustand";
+import { create, StateCreator } from "zustand";
 import { IUser } from "interfaces/user";
 import { persist } from "zustand/middleware";
 
