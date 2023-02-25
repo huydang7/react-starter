@@ -1,89 +1,53 @@
-@import "variables.scss";
-
-@each $spacing-size in $spacing-sizes {
-  .m-#{$spacing-size} {
-    margin: getSpacingSize($spacing-size);
-  }
-  .mt-#{$spacing-size} {
-    margin-top: getSpacingSize($spacing-size);
-  }
-  .mb-#{$spacing-size} {
-    margin-bottom: getSpacingSize($spacing-size);
-  }
-  .ml-#{$spacing-size} {
-    margin-left: getSpacingSize($spacing-size);
-  }
-  .mr-#{$spacing-size} {
-    margin-right: getSpacingSize($spacing-size);
-  }
-  .my-#{$spacing-size} {
-    margin-top: getSpacingSize($spacing-size);
-    margin-bottom: getSpacingSize($spacing-size);
-  }
-  .mx-#{$spacing-size} {
-    margin-left: getSpacingSize($spacing-size);
-    margin-right: getSpacingSize($spacing-size);
-  }
-
-  .p-#{$spacing-size} {
-    padding: getSpacingSize($spacing-size);
-  }
-  .px-#{$spacing-size} {
-    padding-left: getSpacingSize($spacing-size);
-    padding-right: getSpacingSize($spacing-size);
-  }
-  .py-#{$spacing-size} {
-    padding-top: getSpacingSize($spacing-size);
-    padding-bottom: getSpacingSize($spacing-size);
-  }
-  .pt-#{$spacing-size} {
-    padding-top: getSpacingSize($spacing-size);
-  }
-  .pr-#{$spacing-size} {
-    padding-right: getSpacingSize($spacing-size);
-  }
-  .pb-#{$spacing-size} {
-    padding-bottom: getSpacingSize($spacing-size);
-  }
-  .pl-#{$spacing-size} {
-    padding-left: getSpacingSize($spacing-size);
+// helpers
+@mixin prop($props, $value) {
+  @each $prop in $props {
+    #{$prop}: $value;
   }
 }
 
-@each $weight in $font-weights {
-  .fw-#{$weight} {
-    font-weight: #{$weight};
+// spacing
+@each $key, $value in $spacing {
+  @each $pkey, $pvalue in $spacing-prefix {
+    .#{$pkey}-#{$key} {
+      @include prop($pvalue, $value);
+    }
   }
 }
 
-// follow tailwind syntax
-
-.flex {
-  display: flex;
+// display
+@each $key, $value in $display {
+  .#{$key} {
+    display: $value;
+  }
 }
 
-.flex-col {
-  flex-direction: column;
+//flex
+@each $key, $value in $flex-direction {
+  .flex-#{$key} {
+    flex-direction: $value;
+  }
 }
 
-.flex-row {
-  flex-direction: row;
+@each $key, $value in $justify-content {
+  .justify-#{$key} {
+    justify-content: $value;
+  }
 }
 
-.justify-center {
-  justify-content: center;
+@each $key, $value in $align-items {
+  .items-#{$key} {
+    align-items: $value;
+  }
 }
 
-.items-center {
-  align-items: center;
+// position
+@each $key, $value in $position {
+  .#{$key} {
+    position: $value;
+  }
 }
 
-.flex-center {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-}
-
+// width & height
 .w-full {
   width: 100%;
 }
@@ -92,6 +56,29 @@
   height: 100%;
 }
 
-.text-center {
-  text-align: center;
+// font
+
+@each $key, $value in $font-weight {
+  .font-#{$key} {
+    font-weight: $value;
+  }
+}
+
+@each $key, $value in $font-size {
+  .text-#{$key} {
+    font-size: $value;
+  }
+}
+
+@each $key, $value in $text-align {
+  .text-#{$key} {
+    text-align: $value;
+  }
+}
+
+// custom
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
