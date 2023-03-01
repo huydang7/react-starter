@@ -15,14 +15,18 @@ import {
 } from "apis/<%=h.changeCase.paramCase(name)%>";
 
 import { IGet<%=h.changeCase.pascalCase(name)%>sQuery, I<%=h.changeCase.pascalCase(name)%> } from "interfaces/<%=h.changeCase.paramCase(name)%>";
-import { prettifyQueryMany, prettifyResult, queryClient } from "shared/query";
+import {
+  prettifyQueryManyResult,
+  prettifyQueryResult,
+  queryClient,
+} from "shared/utils";
 
 export const useGet<%=h.changeCase.pascalCase(name)%>s = (query: IGet<%=h.changeCase.pascalCase(name)%>sQuery) => {
   const resp = useQuery(
     ["get<%=h.changeCase.pascalCase(name)%>s", query],
     () => get<%= getManyName %>(query)
   );
-  return prettifyQueryMany<I<%=h.changeCase.pascalCase(name)%>>(resp);
+  return prettifyQueryManyResult<I<%=h.changeCase.pascalCase(name)%>>(resp);
 };
 
 export const useGet<%=h.changeCase.pascalCase(name)%> = (id: string) => {
@@ -31,12 +35,12 @@ export const useGet<%=h.changeCase.pascalCase(name)%> = (id: string) => {
       enabled: false,
     }
   );
-  return prettifyResult<I<%=h.changeCase.pascalCase(name)%>>(resp);
+  return prettifyQueryResult<I<%=h.changeCase.pascalCase(name)%>>(resp);
 };
 
 export const useCreate<%=h.changeCase.pascalCase(name)%> = () => {
   return useMutation(
-    (payload: Omit<I<%=h.changeCase.pascalCase(name)%>, "id">) => create<%=h.changeCase.pascalCase(name)%>(payload),
+    create<%=h.changeCase.pascalCase(name)%>,
     {
       onSuccess() {
         queryClient.invalidateQueries({ queryKey: ["get<%=h.changeCase.pascalCase(name)%>s"] });
@@ -47,8 +51,8 @@ export const useCreate<%=h.changeCase.pascalCase(name)%> = () => {
 
 export const useUpdate<%=h.changeCase.pascalCase(name)%> = () => {
   return useMutation(
-    (payload: {id:string, <%=h.changeCase.camel(name)%>:Partial<I<%=h.changeCase.pascalCase(name)%>>}) =>
-      update<%=h.changeCase.pascalCase(name)%>(payload.id, payload.<%=h.changeCase.camel(name)%>),
+    (payload: {id:string, data:Partial<I<%=h.changeCase.pascalCase(name)%>>}) =>
+      update<%=h.changeCase.pascalCase(name)%>(payload.id, payload.data),
     {
       onSuccess() {
         queryClient.invalidateQueries({ queryKey: ["get<%=h.changeCase.pascalCase(name)%>s"] });
@@ -59,7 +63,7 @@ export const useUpdate<%=h.changeCase.pascalCase(name)%> = () => {
 
 export const useDelete<%=h.changeCase.pascalCase(name)%> = () => {
   return useMutation(
-    (payload: string) => delete<%=h.changeCase.pascalCase(name)%>(payload),
+    delete<%=h.changeCase.pascalCase(name)%>,
     {
       onSuccess() {
         queryClient.invalidateQueries({ queryKey: ["get<%=h.changeCase.pascalCase(name)%>s"] });

@@ -41,8 +41,8 @@ export const useCreateUser = () => {
 
 export const useUpdateUser = () => {
   return useMutation(
-    (payload: { id: string; user: Partial<IUser> }) =>
-      updateUser(payload.id, payload.user),
+    (payload: { id: string; data: Partial<IUser> }) =>
+      updateUser(payload.id, payload.data),
     {
       onSuccess() {
         queryClient.invalidateQueries({ queryKey: ["getUsers"] });
