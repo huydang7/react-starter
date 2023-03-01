@@ -1,7 +1,14 @@
 import { QueryClient, UseQueryResult } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
 
 type FortmattedAxiosResponse = AxiosResponse<{
   result: any;
@@ -44,4 +51,22 @@ export const prettifyQueryMany = <T = any>(
     total: axiosResponse?.data?.result?.count || 0,
     ...rest,
   };
+};
+
+export const makeRequest = async (
+  api: Promise<AxiosResponse<any, any>>,
+  select?: string
+) => {
+  try {
+    const axiosResponse = await api;
+    if (select) {
+      if (axiosResponse?.data?.result[select]) {
+        return axiosResponse?.data?.result[select];
+      }
+      return null;
+    }
+    return axiosResponse?.data?.result;
+  } catch (error) {
+    console.log(error);
+  }
 };

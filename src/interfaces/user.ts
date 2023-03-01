@@ -1,3 +1,5 @@
+import { IPaginationQuery } from "./base";
+
 export enum Role {
   ADMIN = "ADMIN",
   USER = "USER",
@@ -11,3 +13,5 @@ export interface IUser {
   role: Role;
   isEmailVerified: boolean;
 }
+
+export interface IGetUsersQuery extends IPaginationQuery {}

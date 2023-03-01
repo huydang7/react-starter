@@ -6,11 +6,18 @@ import { Role } from "interfaces/user";
 import { HeaderHeight, SiderWidth } from "shared/constants";
 import { Suspense } from "react";
 import Logo from "components/Logo";
+import { shallow } from "zustand/shallow";
 
 const { Header, Sider } = Layout;
 
-const MainLayout = (props: any) => {
-  const { currentUser, logOut } = useAuthStore();
+const MainLayout = () => {
+  const { currentUser, logOut } = useAuthStore(
+    (state) => ({
+      currentUser: state.currentUser,
+      logOut: state.logOut,
+    }),
+    shallow
+  );
   const navigate = useNavigate();
   const configs = [
     {

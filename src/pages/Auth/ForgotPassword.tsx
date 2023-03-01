@@ -1,8 +1,7 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Row } from "antd";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useForgotPassword } from "hooks/useAuthQuery";
-import { useAuthStore } from "stores/auth";
 
 const ForgotPassword = () => {
   const location = useLocation();
@@ -15,11 +14,6 @@ const ForgotPassword = () => {
     mutate(values);
   };
 
-  const user = useAuthStore().currentUser;
-
-  if (user) {
-    return <Navigate to="/" />;
-  }
   if (isSuccess) {
     return (
       <span className="text-center">

@@ -1,11 +1,11 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-const AccountRoutes = () => (
+const UserRoutes = () => (
   <Routes>
     <Route path="/" element={<Navigate to="profile" replace />} />
     <Route path="profile" element={<></>} />
   </Routes>
 );
 
-export default AccountRoutes;
+export default UserRoutes;

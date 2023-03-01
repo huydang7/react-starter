@@ -2,7 +2,6 @@ import { LockOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { useResetPassword } from "hooks/useAuthQuery";
-import { useAuthStore } from "stores/auth";
 
 const ResetPassword = () => {
   const location = useLocation();
@@ -15,13 +14,8 @@ const ResetPassword = () => {
     mutate({ ...values, token });
   };
 
-  const user = useAuthStore().currentUser;
-
   if (isSuccess) {
     return <Navigate to="/auth/login?isResetPwdSuccess=true" />;
-  }
-  if (user) {
-    return <Navigate to="/" />;
   }
 
   return (

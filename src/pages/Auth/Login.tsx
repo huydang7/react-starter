@@ -1,8 +1,7 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Tag } from "antd";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useLogin } from "hooks/useAuthQuery";
-import { useAuthStore } from "stores/auth";
 
 const Login = () => {
   const location = useLocation();
@@ -17,11 +16,6 @@ const Login = () => {
     mutate(values);
   };
 
-  const user = useAuthStore().currentUser;
-
-  if (user) {
-    return <Navigate to="/" />;
-  }
   return (
     <Form
       initialValues={{ remember: true }}

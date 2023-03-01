@@ -1,17 +1,15 @@
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import _ from "lodash";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useCheckEmail, useRegister } from "hooks/useAuthQuery";
-import { useAuthStore } from "stores/auth";
 
 const debounced = _.debounce((callback) => {
   return callback();
 }, 500);
 
 const Register = () => {
-  const user = useAuthStore().currentUser;
   const navigate = useNavigate();
   const { mutateAsync, isLoading, isError } = useRegister();
   const checkEmail = useCheckEmail();
@@ -26,7 +24,7 @@ const Register = () => {
 
   const handleEmailChanged = (e: string) => {
     debounced(async () => {
-      const res = await checkEmail.mutateAsync(e);
+      const res = await checkEmail.mutateAsync({ email: e });
       if (res) {
         const currentErrors = form.getFieldError("email");
         form.setFields([
@@ -38,10 +36,6 @@ const Register = () => {
       }
     });
   };
-
-  if (user) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <Form

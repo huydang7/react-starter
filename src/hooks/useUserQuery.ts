@@ -29,7 +29,7 @@ export const useGetUser = (query: any) => {
 
 export const useCreateUser = () => {
   return useMutation((payload: Omit<IUser, "id">) => createUser(payload), {
-    onSuccess(data, variables, context) {
+    onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["getUsers"] });
     },
   });
@@ -40,7 +40,7 @@ export const useUpdateUser = () => {
     (payload: { id: string; user: Partial<IUser> }) =>
       updateUser(payload.id, payload.user),
     {
-      onSuccess(data, variables, context) {
+      onSuccess() {
         queryClient.invalidateQueries({ queryKey: ["getUsers"] });
       },
     }

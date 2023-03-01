@@ -7,7 +7,7 @@ export type AuthState = {
   isAuthenticated: boolean;
   currentUser: null | IUser;
   tokens: any;
-  loginSuccess: (payload: { user: IUser; tokens: any }) => void;
+  setUserAndTokens: (payload: { user: IUser; tokens: any }) => void;
   setUser: (user: IUser) => void;
   logOut: () => void;
 };
@@ -16,7 +16,7 @@ export const store: StateCreator<AuthState> = (set: Function) => ({
   isAuthenticated: false,
   currentUser: null,
   tokens: null,
-  loginSuccess: (payload: { user: IUser; tokens: any }) =>
+  setUserAndTokens: (payload: { user: IUser; tokens: any }) =>
     set(
       produce((state: AuthState) => {
         state.isAuthenticated = true;

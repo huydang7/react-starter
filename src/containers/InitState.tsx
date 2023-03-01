@@ -1,7 +1,8 @@
-import { useGetMe } from "hooks/useAuthQuery";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "stores/auth";
 import LoadingScreen from "components/LoadingScreen";
+import { makeRequest } from "shared/query";
+import { getMe } from "apis/auth";
 
 const useHydration = () => {
   const [hydrated, setHydrated] = useState(useAuthStore.persist.hasHydrated);
@@ -25,21 +26,31 @@ const useHydration = () => {
   return hydrated;
 };
 
-const InitState = (props: any) => {
-  const { tokens } = useAuthStore();
-  const getMe = useGetMe();
+const InitState = (props: { children: JSX.Element }) => {
+  const { tokens, setUser } = useAuthStore();
+  const [finished, setFinished] = useState(false);
   const hydrated = useHydration();
 
+  const init = async () => {
+    const user = await makeRequest(getMe());
+    setUser(user);
+    setFinished(true);
+  };
+
   useEffect(() => {
-    if (tokens && hydrated) {
-      getMe.refetch();
+    if (hydrated) {
+      if (tokens) {
+        init();
+      } else {
+        setFinished(true);
+      }
     }
   }, [tokens, hydrated]);
 
-  if (!hydrated) {
+  if (!hydrated || !finished) {
     return <LoadingScreen />;
   }
-  return <>{props?.children}</>;
+  return <>{props.children}</>;
 };
 
 export default InitState;
