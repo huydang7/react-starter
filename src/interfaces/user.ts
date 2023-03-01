@@ -1,11 +1,11 @@
-import { IPaginationQuery } from "./base";
+import { IPaginationQuery, ITimestamp } from "./base";
 
 export enum Role {
   ADMIN = "ADMIN",
   USER = "USER",
 }
 
-export interface IUser {
+export interface IUser extends ITimestamp {
   id: string;
   name: string;
   email: string;
