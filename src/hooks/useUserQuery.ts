@@ -8,7 +8,7 @@ import {
 } from "apis/user";
 
 import { IGetUsersQuery, IUser } from "interfaces/user";
-import { prettifyQueryMany, prettifyResult, queryClient } from "shared/query";
+import { prettifyQueryMany, prettifyResult, queryClient } from "shared/utils";
 
 export const useGetUsers = (query: IGetUsersQuery) => {
   const result = useQuery(["getUsers", query], () => getUsers(query), {
