@@ -3,6 +3,7 @@ import { useAuthStore } from "stores/auth";
 import LoadingScreen from "components/LoadingScreen";
 import { makeRequest } from "shared/query";
 import { getMe } from "apis/auth";
+import { shallow } from "zustand/shallow";
 
 const useHydration = () => {
   const [hydrated, setHydrated] = useState(useAuthStore.persist.hasHydrated);
@@ -27,7 +28,10 @@ const useHydration = () => {
 };
 
 const InitState = (props: { children: JSX.Element }) => {
-  const { tokens, setUser } = useAuthStore();
+  const { tokens, setUser } = useAuthStore(
+    (state) => ({ tokens: state.tokens, setUser: state.setUser }),
+    shallow
+  );
   const [finished, setFinished] = useState(false);
   const hydrated = useHydration();
 
