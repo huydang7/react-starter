@@ -9,12 +9,9 @@ const ForgotPassword = React.lazy(() => import("pages/Auth/ForgotPassword"));
 const ResetPassword = React.lazy(() => import("pages/Auth/ResetPassword"));
 
 const AuthRoutes = () => {
-  const isAuthenticated = useAuthStore(
-    (state) => state.isAuthenticated,
-    shallow
-  );
+  const user = useAuthStore((state) => state.currentUser, shallow);
 
-  if (isAuthenticated) {
+  if (user) {
     return <Navigate to="/" />;
   }
 

@@ -11,20 +11,20 @@ const debounced = _.debounce((callback) => {
 
 const Register = () => {
   const navigate = useNavigate();
-  const { mutateAsync, isLoading, isError } = useRegister();
+  const { mutateAsync: register, isLoading, isError } = useRegister();
   const checkEmail = useCheckEmail();
   const [form] = Form.useForm();
 
   const onFinish = async (values: any) => {
-    const result = await mutateAsync(values);
+    const result = await register(values);
     if (result) {
       navigate(`/auth/login?isRegisterSuccess=true&email=${values.email}`);
     }
   };
 
-  const handleEmailChanged = (e: string) => {
+  const handleEmailChanged = (email: string) => {
     debounced(async () => {
-      const res = await checkEmail.mutateAsync({ email: e });
+      const res = await checkEmail.mutateAsync({ email });
       if (res) {
         const currentErrors = form.getFieldError("email");
         form.setFields([

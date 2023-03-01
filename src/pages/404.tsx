@@ -1,7 +1,8 @@
 import { Button, Result } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-const NotFound: React.FC = (props: any) => {
+
+const NotFound: React.FC = () => {
   return (
     <div style={{ height: "100%", width: "100%" }} className="flex-center">
       <Result

@@ -7,10 +7,10 @@ import {
   getUser,
 } from "apis/user";
 
-import { IUser } from "interfaces/user";
+import { IGetUsersQuery, IUser } from "interfaces/user";
 import { prettifyQueryMany, prettifyResult, queryClient } from "shared/query";
 
-export const useGetUsers = (query: any) => {
+export const useGetUsers = (query: IGetUsersQuery) => {
   const result = useQuery(["getUsers", query], () => getUsers(query), {
     refetchOnWindowFocus: false,
     retry: false,
@@ -18,8 +18,8 @@ export const useGetUsers = (query: any) => {
   return prettifyQueryMany<IUser>(result);
 };
 
-export const useGetUser = (query: any) => {
-  const result = useQuery(["getUser", query], () => getUser(query?.id), {
+export const useGetUser = (id: string) => {
+  const result = useQuery(["getUser", id], () => getUser(id), {
     refetchOnWindowFocus: false,
     enabled: false,
     retry: false,
@@ -48,7 +48,7 @@ export const useUpdateUser = () => {
 };
 
 export const useDeteleUser = () => {
-  return useMutation((payload: string) => deleteUser(payload), {
+  return useMutation((id: string) => deleteUser(id), {
     onSuccess(data, variables, context) {
       queryClient.invalidateQueries({ queryKey: ["getUsers"] });
     },

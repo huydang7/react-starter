@@ -12,3 +12,8 @@ export interface IToken {
   type: TokenType;
   expires: string;
 }
+
+export type AuthTokenInfo = {
+  access: IToken;
+  refresh: IToken;
+};

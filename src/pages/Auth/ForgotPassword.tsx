@@ -8,10 +8,15 @@ const ForgotPassword = () => {
   const params = new URLSearchParams(location.search);
 
   const email = params.get("email");
-  const { mutate, isSuccess, isError, isLoading } = useForgotPassword();
+  const {
+    mutate: forgotPassword,
+    isSuccess,
+    isError,
+    isLoading,
+  } = useForgotPassword();
 
   const onFinish = (values: any) => {
-    mutate(values);
+    forgotPassword(values);
   };
 
   if (isSuccess) {

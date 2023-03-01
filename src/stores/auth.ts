@@ -2,24 +2,22 @@ import produce from "immer";
 import { create, StateCreator } from "zustand";
 import { IUser } from "interfaces/user";
 import { persist } from "zustand/middleware";
+import { AuthTokenInfo } from "interfaces/token";
 
 export type AuthState = {
-  isAuthenticated: boolean;
   currentUser: null | IUser;
-  tokens: any;
-  setUserAndTokens: (payload: { user: IUser; tokens: any }) => void;
+  tokens: AuthTokenInfo | null;
+  setUserAndTokens: (payload: { user: IUser; tokens: AuthTokenInfo }) => void;
   setUser: (user: IUser) => void;
   logOut: () => void;
 };
 
 export const store: StateCreator<AuthState> = (set: Function) => ({
-  isAuthenticated: false,
   currentUser: null,
   tokens: null,
-  setUserAndTokens: (payload: { user: IUser; tokens: any }) =>
+  setUserAndTokens: (payload: { user: IUser; tokens: AuthTokenInfo }) =>
     set(
       produce((state: AuthState) => {
-        state.isAuthenticated = true;
         state.currentUser = payload.user;
         state.tokens = payload.tokens;
       })
@@ -27,14 +25,12 @@ export const store: StateCreator<AuthState> = (set: Function) => ({
   setUser: (user: IUser) =>
     set(
       produce((state: AuthState) => {
-        state.isAuthenticated = true;
         state.currentUser = user;
       })
     ),
   logOut: () =>
     set(
       produce((state: AuthState) => {
-        state.isAuthenticated = false;
         state.currentUser = null;
         state.tokens = null;
       })

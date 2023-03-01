@@ -10,10 +10,10 @@ const Login = () => {
   const isResetPwdSuccess = params.get("isResetPwdSuccess") === "true";
 
   const email = params.get("email");
-  const { mutate, isLoading, isError } = useLogin();
+  const { mutate: login, isLoading, isError } = useLogin();
 
   const onFinish = (values: any) => {
-    mutate(values);
+    login(values);
   };
 
   return (

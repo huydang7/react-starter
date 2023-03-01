@@ -8,10 +8,15 @@ const ResetPassword = () => {
   const params = new URLSearchParams(location.search);
   const token = params.get("token");
 
-  const { mutate, isLoading, isError, isSuccess } = useResetPassword();
+  const {
+    mutate: resetPassword,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useResetPassword();
   const onFinish = (values: any) => {
     delete values.newPassword;
-    mutate({ ...values, token });
+    resetPassword({ ...values, token });
   };
 
   if (isSuccess) {
