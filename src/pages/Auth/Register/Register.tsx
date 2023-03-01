@@ -3,7 +3,7 @@ import { Button, Form, Input } from "antd";
 import _ from "lodash";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useCheckEmail, useRegister } from "hooks/useAuth";
+import { useCheckEmail, useRegister } from "hooks/useAuthQuery";
 import { useAuthStore } from "stores/auth";
 
 const debounced = _.debounce((callback) => {

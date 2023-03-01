@@ -1,5 +1,5 @@
 import { stringify } from "qs";
-import request from "services/request";
+import request from "services/http";
 
 export const getUsers = (query: any) => {
   return request.get(`/v1/user?${stringify(query)}`);

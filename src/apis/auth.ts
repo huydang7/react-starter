@@ -1,4 +1,4 @@
-import request from "services/request";
+import request from "services/http";
 
 export const login = (payload: any) => {
   return request.post("/v1/auth/login", payload);

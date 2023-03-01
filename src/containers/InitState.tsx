@@ -1,4 +1,4 @@
-import { useGetMe } from "hooks/useAuth";
+import { useGetMe } from "hooks/useAuthQuery";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "stores/auth";
 import LoadingScreen from "components/LoadingScreen";

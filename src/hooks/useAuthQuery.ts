@@ -35,17 +35,17 @@ export const useLogin = () => {
 };
 
 export const useRegister = () => {
-  return useMutation(["register"], register);
+  return useMutation(register);
 };
 
 export const useForgotPassword = () => {
-  return useMutation(["forgotPassword"], forgotPassword);
+  return useMutation(forgotPassword);
 };
 
 export const useResetPassword = () => {
-  return useMutation(["resetPassword"], resetPassword);
+  return useMutation(resetPassword);
 };
 
 export const useCheckEmail = () => {
-  return useMutation(["checkEmail"], checkEmail);
+  return useMutation(checkEmail);
 };

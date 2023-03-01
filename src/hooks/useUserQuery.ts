@@ -19,7 +19,7 @@ export const useGetUsers = (query: any) => {
 };
 
 export const useGetUser = (query: any) => {
-  const result = useQuery(["getUser"], () => getUser(query?.id), {
+  const result = useQuery(["getUser", query], () => getUser(query?.id), {
     refetchOnWindowFocus: false,
     enabled: false,
     retry: false,
@@ -28,22 +28,17 @@ export const useGetUser = (query: any) => {
 };
 
 export const useCreateUser = () => {
-  return useMutation(
-    ["createUser"],
-    (payload: Omit<IUser, "id">) => createUser(payload),
-    {
-      onSuccess(data, variables, context) {
-        queryClient.invalidateQueries({ queryKey: ["getUsers"] });
-      },
-    }
-  );
+  return useMutation((payload: Omit<IUser, "id">) => createUser(payload), {
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries({ queryKey: ["getUsers"] });
+    },
+  });
 };
 
 export const useUpdateUser = () => {
   return useMutation(
-    ["updateUser"],
-    (payload: Partial<IUser> & { id: string }) =>
-      updateUser(payload.id, payload),
+    (payload: { id: string; user: Partial<IUser> }) =>
+      updateUser(payload.id, payload.user),
     {
       onSuccess(data, variables, context) {
         queryClient.invalidateQueries({ queryKey: ["getUsers"] });
@@ -53,13 +48,9 @@ export const useUpdateUser = () => {
 };
 
 export const useDeteleUser = () => {
-  return useMutation(
-    ["useDeteleUser"],
-    (payload: string) => deleteUser(payload),
-    {
-      onSuccess(data, variables, context) {
-        queryClient.invalidateQueries({ queryKey: ["getUsers"] });
-      },
-    }
-  );
+  return useMutation((payload: string) => deleteUser(payload), {
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries({ queryKey: ["getUsers"] });
+    },
+  });
 };

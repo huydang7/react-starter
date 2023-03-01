@@ -1,7 +1,7 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Row } from "antd";
 import { Link, Navigate, useLocation } from "react-router-dom";
-import { useForgotPassword } from "hooks/useAuth";
+import { useForgotPassword } from "hooks/useAuthQuery";
 import { useAuthStore } from "stores/auth";
 
 const ForgotPassword = () => {
