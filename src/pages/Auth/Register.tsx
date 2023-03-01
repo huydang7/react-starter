@@ -38,12 +38,7 @@ const Register = () => {
   };
 
   return (
-    <Form
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      form={form}
-      style={{ width: 240 }}
-    >
+    <Form onFinish={onFinish} form={form} style={{ width: 240 }}>
       <Form.Item
         name="name"
         rules={[{ required: true, message: "Vui lòng không để trống tên" }]}

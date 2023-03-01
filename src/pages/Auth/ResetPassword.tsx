@@ -24,11 +24,7 @@ const ResetPassword = () => {
   }
 
   return (
-    <Form
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      style={{ width: 240 }}
-    >
+    <Form onFinish={onFinish} style={{ width: 240 }}>
       <Form.Item
         name="password"
         rules={[

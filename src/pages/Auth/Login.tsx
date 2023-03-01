@@ -17,11 +17,7 @@ const Login = () => {
   };
 
   return (
-    <Form
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      style={{ width: 240 }}
-    >
+    <Form onFinish={onFinish} style={{ width: 240 }}>
       {isRegisterSuccess && (
         <div className="flex-center mb-1">
           <Tag color="green">Bạn đã đăng ký thành công</Tag>

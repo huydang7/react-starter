@@ -1,13 +1,9 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Row } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForgotPassword } from "hooks/useAuthQuery";
 
 const ForgotPassword = () => {
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-
-  const email = params.get("email");
   const {
     mutate: forgotPassword,
     isSuccess,
@@ -29,13 +25,8 @@ const ForgotPassword = () => {
   }
   return (
     <>
-      <Form
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        style={{ width: 240 }}
-      >
+      <Form onFinish={onFinish} style={{ width: 240 }}>
         <Form.Item
-          initialValue={email}
           name="email"
           rules={[
             { required: true, message: "Vui lòng không để trống email" },
