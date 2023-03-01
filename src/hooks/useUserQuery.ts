@@ -8,14 +8,18 @@ import {
 } from "apis/user";
 
 import { IGetUsersQuery, IUser } from "interfaces/user";
-import { prettifyQueryMany, prettifyResult, queryClient } from "shared/utils";
+import {
+  prettifyQueryManyResult,
+  prettifyQueryResult,
+  queryClient,
+} from "shared/utils";
 
 export const useGetUsers = (query: IGetUsersQuery) => {
   const result = useQuery(["getUsers", query], () => getUsers(query), {
     refetchOnWindowFocus: false,
     retry: false,
   });
-  return prettifyQueryMany<IUser>(result);
+  return prettifyQueryManyResult<IUser>(result);
 };
 
 export const useGetUser = (id: string) => {
@@ -24,7 +28,7 @@ export const useGetUser = (id: string) => {
     enabled: false,
     retry: false,
   });
-  return prettifyResult<IUser>(result);
+  return prettifyQueryResult<IUser>(result);
 };
 
 export const useCreateUser = () => {

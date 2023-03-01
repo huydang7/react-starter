@@ -1,11 +1,17 @@
-import { QueryClient, UseQueryResult } from "@tanstack/react-query";
+import {
+  QueryClient,
+  UseMutationResult,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false,
+      notifyOnChangeProps: ["data", "status"],
       retry: false,
+      refetchOnWindowFocus: false,
+      enabled: false,
     },
   },
 });
@@ -18,18 +24,22 @@ type FortmattedAxiosResponse = AxiosResponse<{
 }>;
 
 type FortmattedQueryResult = UseQueryResult<FortmattedAxiosResponse, any>;
+type FortmattedMutationResult = UseMutationResult<FortmattedAxiosResponse, any>;
 
-type PrettifyResult<T> = {
+export type PrettifyResult<T> = {
   result: T | null;
 } & Omit<FortmattedQueryResult, "data">;
 
-type PrettifyQueryManyResult<T> = {
+export type PrettifyMutationResult<T> = {
+  result: T | null;
+} & Omit<FortmattedMutationResult, "data">;
+
+export type PrettifyQueryManyResult<T> = {
   rows: T[];
-  count: number;
   total: number;
 } & Omit<FortmattedQueryResult, "data">;
 
-export const prettifyResult = <T = any>(
+export const prettifyQueryResult = <T = any>(
   result: FortmattedQueryResult
 ): PrettifyResult<T> => {
   const { data: axiosResponse, ...rest } = result;
@@ -40,15 +50,25 @@ export const prettifyResult = <T = any>(
   };
 };
 
-export const prettifyQueryMany = <T = any>(
+export const prettifyQueryManyResult = <T = any>(
   queryResult: FortmattedQueryResult
 ): PrettifyQueryManyResult<T> => {
   const { data: axiosResponse, ...rest } = queryResult;
 
   return {
     rows: axiosResponse?.data?.result?.rows || [],
-    count: axiosResponse?.data?.result?.count || 0,
     total: axiosResponse?.data?.result?.count || 0,
+    ...rest,
+  };
+};
+
+export const prettifyMutationResult = <T = any>(
+  result: FortmattedMutationResult
+): PrettifyMutationResult<T> => {
+  const { data: axiosResponse, ...rest } = result;
+
+  return {
+    result: axiosResponse?.data?.result,
     ...rest,
   };
 };
