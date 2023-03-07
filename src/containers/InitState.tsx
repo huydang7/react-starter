@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuthStore } from "stores/auth";
 import LoadingScreen from "components/LoadingScreen";
-import { makeRequest } from "shared/query";
+import { makeRequest } from "shared/utils";
 import { getMe } from "apis/auth";
 import { shallow } from "zustand/shallow";
 
