@@ -33,6 +33,7 @@ export type PrettifyResult<T> = {
 
 export type PrettifyMutationResult<T> = {
   result: T | null;
+  loading: boolean;
 } & Omit<FortmattedMutationResult, "data">;
 
 export type PrettifyQueryManyResult<T> = {
@@ -48,7 +49,7 @@ export const prettifyQueryResult = <T = any>(
 
   return {
     result: axiosResponse?.data?.result,
-    loading: rest.isFetching || rest.isLoading,
+    loading: rest.status === "loading",
     ...rest,
   };
 };
@@ -61,7 +62,7 @@ export const prettifyQueryManyResult = <T = any>(
   return {
     rows: axiosResponse?.data?.result?.rows || [],
     total: axiosResponse?.data?.result?.count || 0,
-    loading: rest.isFetching || rest.isLoading,
+    loading: rest.status === "loading",
     ...rest,
   };
 };
@@ -73,6 +74,7 @@ export const prettifyMutationResult = <T = any>(
 
   return {
     result: axiosResponse?.data?.result,
+    loading: rest.status === "loading",
     ...rest,
   };
 };
