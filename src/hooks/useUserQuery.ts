@@ -1,21 +1,10 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-  createUser,
-  getUsers,
-  updateUser,
-  deleteUser,
-  getUser,
-} from "apis/user";
-
-import { IGetUsersQuery, IUser } from "interfaces/user";
-import {
-  prettifyQueryManyResult,
-  prettifyQueryResult,
-  queryClient,
-} from "shared/utils";
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { createUser, deleteUser, getUser, getUsers, updateUser } from 'apis/user';
+import { IGetUsersQuery, IUser } from 'interfaces/user';
+import { prettifyQueryManyResult, prettifyQueryResult, queryClient } from 'shared/utils';
 
 export const useGetUsers = (query: IGetUsersQuery) => {
-  const result = useQuery(["getUsers", query], () => getUsers(query), {
+  const result = useQuery(['getUsers', query], () => getUsers(query), {
     refetchOnWindowFocus: false,
     retry: false,
   });
@@ -23,7 +12,7 @@ export const useGetUsers = (query: IGetUsersQuery) => {
 };
 
 export const useGetUser = (id: string) => {
-  const result = useQuery(["getUser", id], () => getUser(id), {
+  const result = useQuery(['getUser', id], () => getUser(id), {
     refetchOnWindowFocus: false,
     enabled: false,
     retry: false,
@@ -32,20 +21,19 @@ export const useGetUser = (id: string) => {
 };
 
 export const useCreateUser = () => {
-  return useMutation((payload: Omit<IUser, "id">) => createUser(payload), {
+  return useMutation((payload: Omit<IUser, 'id'>) => createUser(payload), {
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["getUsers"] });
+      queryClient.invalidateQueries({ queryKey: ['getUsers'] });
     },
   });
 };
 
 export const useUpdateUser = () => {
   return useMutation(
-    (payload: { id: string; data: Partial<IUser> }) =>
-      updateUser(payload.id, payload.data),
+    (payload: { id: string; data: Partial<IUser> }) => updateUser(payload.id, payload.data),
     {
       onSuccess() {
-        queryClient.invalidateQueries({ queryKey: ["getUsers"] });
+        queryClient.invalidateQueries({ queryKey: ['getUsers'] });
       },
     }
   );
@@ -53,8 +41,8 @@ export const useUpdateUser = () => {
 
 export const useDeteleUser = () => {
   return useMutation((id: string) => deleteUser(id), {
-    onSuccess(data, variables, context) {
-      queryClient.invalidateQueries({ queryKey: ["getUsers"] });
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ['getUsers'] });
     },
   });
 };

@@ -4,8 +4,8 @@ export interface ITimestamp {
   deletedAt?: string;
 }
 export enum Sort {
-  DESC = "DESC",
-  ASC = "ASC",
+  DESC = 'DESC',
+  ASC = 'ASC',
 }
 
 export type IOrder = [[key: string, sorter: Sort]];

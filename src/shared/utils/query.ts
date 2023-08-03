@@ -1,14 +1,10 @@
-import {
-  QueryClient,
-  UseMutationResult,
-  UseQueryResult,
-} from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
+import { QueryClient, UseMutationResult, UseQueryResult } from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      notifyOnChangeProps: ["data", "status"],
+      notifyOnChangeProps: ['data', 'status'],
       retry: false,
       refetchOnWindowFocus: false,
       enabled: false,
@@ -29,27 +25,25 @@ type FortmattedMutationResult = UseMutationResult<FortmattedAxiosResponse, any>;
 export type PrettifyResult<T> = {
   result: T | null;
   loading: boolean;
-} & Omit<FortmattedQueryResult, "data">;
+} & Omit<FortmattedQueryResult, 'data'>;
 
 export type PrettifyMutationResult<T> = {
   result: T | null;
   loading: boolean;
-} & Omit<FortmattedMutationResult, "data">;
+} & Omit<FortmattedMutationResult, 'data'>;
 
 export type PrettifyQueryManyResult<T> = {
   rows: T[];
   total: number;
   loading: boolean;
-} & Omit<FortmattedQueryResult, "data">;
+} & Omit<FortmattedQueryResult, 'data'>;
 
-export const prettifyQueryResult = <T = any>(
-  result: FortmattedQueryResult
-): PrettifyResult<T> => {
+export const prettifyQueryResult = <T = any>(result: FortmattedQueryResult): PrettifyResult<T> => {
   const { data: axiosResponse, ...rest } = result;
 
   return {
     result: axiosResponse?.data?.result,
-    loading: rest.status === "loading",
+    loading: rest.status === 'loading',
     ...rest,
   };
 };
@@ -62,7 +56,7 @@ export const prettifyQueryManyResult = <T = any>(
   return {
     rows: axiosResponse?.data?.result?.rows || [],
     total: axiosResponse?.data?.result?.count || 0,
-    loading: rest.status === "loading",
+    loading: rest.status === 'loading',
     ...rest,
   };
 };
@@ -74,15 +68,12 @@ export const prettifyMutationResult = <T = any>(
 
   return {
     result: axiosResponse?.data?.result,
-    loading: rest.status === "loading",
+    loading: rest.status === 'loading',
     ...rest,
   };
 };
 
-export const makeRequest = async (
-  api: Promise<AxiosResponse<any, any>>,
-  select?: string
-) => {
+export const makeRequest = async (api: Promise<AxiosResponse<any, any>>, select?: string) => {
   try {
     const axiosResponse = await api;
     if (select) {

@@ -1,12 +1,13 @@
-import { DesktopOutlined, UserOutlined } from "@ant-design/icons";
-import { Layout, Menu, Button, Dropdown, Spin } from "antd";
-import { useAuthStore } from "stores/auth";
-import { Outlet, useNavigate } from "react-router-dom";
-import { Role } from "interfaces/user";
-import { HeaderHeight, SiderWidth } from "shared/constants";
-import { Suspense } from "react";
-import Logo from "components/Logo";
-import { shallow } from "zustand/shallow";
+import { Suspense } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { DesktopOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Layout, Menu, Spin } from 'antd';
+import { Role } from 'interfaces/user';
+import { HeaderHeight, SiderWidth } from 'shared/constants';
+import { useAuthStore } from 'stores/auth';
+import { shallow } from 'zustand/shallow';
+
+import Logo from 'components/Logo';
 
 const { Header, Sider } = Layout;
 
@@ -21,20 +22,20 @@ const MainLayout = () => {
   const navigate = useNavigate();
   const configs = [
     {
-      path: "/",
-      title: "Quản lí tài khoản",
+      path: '/',
+      title: 'Quản lí tài khoản',
       icon: <DesktopOutlined />,
       roles: [Role.ADMIN, Role.USER],
     },
     {
-      path: "/user",
-      title: "Quản lí người dùng",
+      path: '/user',
+      title: 'Quản lí người dùng',
       icon: <UserOutlined />,
       roles: [Role.ADMIN, Role.USER],
     },
   ];
   const renderMenu = () => {
-    let items: any = [];
+    const items: any = [];
     configs.forEach((e, i) => {
       if (currentUser && e.roles.includes(currentUser.role)) {
         items.push({
@@ -49,17 +50,17 @@ const MainLayout = () => {
   };
 
   return (
-    <Layout style={{ height: "100%" }}>
+    <Layout style={{ height: '100%' }}>
       <Sider
         width={SiderWidth}
         style={{
-          overflow: "auto",
-          height: "100%",
-          position: "fixed",
+          overflow: 'auto',
+          height: '100%',
+          position: 'fixed',
           left: 0,
           top: 0,
           bottom: 0,
-          background: "#fff",
+          background: '#fff',
           padding: 12,
         }}
       >
@@ -71,33 +72,29 @@ const MainLayout = () => {
       <Layout style={{ marginLeft: SiderWidth }}>
         <Header
           style={{
-            overflow: "auto",
+            overflow: 'auto',
             height: HeaderHeight,
-            position: "fixed",
+            position: 'fixed',
             left: SiderWidth,
             top: 0,
             right: 0,
-            background: "white",
+            background: 'white',
             zIndex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
           <div></div>
 
           <Dropdown
             menu={{
-              items: [{ label: "Đăng xuất", key: 1, onClick: () => logOut() }],
+              items: [{ label: 'Đăng xuất', key: 1, onClick: () => logOut() }],
             }}
             placement="bottom"
-            trigger={["click"]}
+            trigger={['click']}
           >
-            <Button
-              type="text"
-              shape="round"
-              style={{ backgroundColor: "rgba(0, 0, 0, 0.030)" }}
-            >
+            <Button type="text" shape="round" style={{ backgroundColor: 'rgba(0, 0, 0, 0.030)' }}>
               <span> Xin chào, {currentUser?.name} </span>
             </Button>
           </Dropdown>
@@ -106,8 +103,8 @@ const MainLayout = () => {
           <div
             style={{
               margin: 0,
-              padding: "24px",
-              background: "#f5f5f5",
+              padding: '24px',
+              background: '#f5f5f5',
             }}
           >
             <Suspense fallback={<Spin />}>

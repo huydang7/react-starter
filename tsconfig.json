@@ -15,9 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite/client"],
-    "baseUrl": "src"
+    "types": ["vite/client"]
   },
-  "include": ["src"],
+  "include": ["src", "commmitlint.config.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

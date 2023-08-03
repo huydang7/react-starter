@@ -1,12 +1,13 @@
-import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
-import { useAuthStore } from "stores/auth";
-import * as AuthService from "./auth";
-import { configs } from "./config";
+import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import { useAuthStore } from 'stores/auth';
+
+import * as AuthService from './auth';
+import { configs } from './config';
 
 const requestAuthInterceptor = (config: InternalAxiosRequestConfig) => {
   const token = useAuthStore.getState().tokens?.access.token;
   if (token) {
-    config.headers["Authorization"] = `Bearer ${token}`;
+    config.headers['Authorization'] = `Bearer ${token}`;
     return config;
   }
   return config;
@@ -29,9 +30,6 @@ const instance = axios.create({
 
 instance.interceptors.request.use(requestAuthInterceptor);
 
-instance.interceptors.response.use(
-  responseFulfilledInterceptor,
-  responseRejectInterceptor
-);
+instance.interceptors.response.use(responseFulfilledInterceptor, responseRejectInterceptor);
 
 export default instance;

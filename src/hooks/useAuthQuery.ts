@@ -1,17 +1,10 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-  checkEmail,
-  forgotPassword,
-  getMe,
-  login,
-  register,
-  resetPassword,
-} from "apis/auth";
-import { useAuthStore } from "stores/auth";
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { checkEmail, forgotPassword, getMe, login, register, resetPassword } from 'apis/auth';
+import { useAuthStore } from 'stores/auth';
 
 export const useGetMe = () => {
   const { setUser } = useAuthStore();
-  return useQuery(["getMe"], () => getMe(), {
+  return useQuery(['getMe'], () => getMe(), {
     enabled: false,
     onSuccess: ({ data, status }) => {
       if (status === 200 && data.result) {

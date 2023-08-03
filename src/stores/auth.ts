@@ -1,8 +1,8 @@
-import produce from "immer";
-import { create, StateCreator } from "zustand";
-import { IUser } from "interfaces/user";
-import { persist } from "zustand/middleware";
-import { AuthTokenInfo } from "interfaces/token";
+import produce from 'immer';
+import { AuthTokenInfo } from 'interfaces/token';
+import { IUser } from 'interfaces/user';
+import { create, StateCreator } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export type AuthState = {
   currentUser: null | IUser;
@@ -12,7 +12,7 @@ export type AuthState = {
   logOut: () => void;
 };
 
-export const store: StateCreator<AuthState> = (set: Function) => ({
+export const store: StateCreator<AuthState> = (set) => ({
   currentUser: null,
   tokens: null,
   setUserAndTokens: (payload: { user: IUser; tokens: AuthTokenInfo }) =>
@@ -39,7 +39,7 @@ export const store: StateCreator<AuthState> = (set: Function) => ({
 
 export const useAuthStore = create<AuthState>()(
   persist(store, {
-    name: "auth-storage",
+    name: 'auth-storage',
     getStorage: () => localStorage,
   })
 );
