@@ -1,9 +1,9 @@
-import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
-import _ from "lodash";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useCheckEmail, useRegister } from "hooks/useAuthQuery";
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Form, Input } from 'antd';
+import { useCheckEmail, useRegister } from 'hooks/useAuthQuery';
+import _ from 'lodash';
 
 const debounced = _.debounce((callback) => {
   return callback();
@@ -26,11 +26,11 @@ const Register = () => {
     debounced(async () => {
       const res = await checkEmail.mutateAsync({ email });
       if (res) {
-        const currentErrors = form.getFieldError("email");
+        const currentErrors = form.getFieldError('email');
         form.setFields([
           {
-            name: "email",
-            errors: [...currentErrors, "Email đã được sử dụng"],
+            name: 'email',
+            errors: [...currentErrors, 'Email đã được sử dụng'],
           },
         ]);
       }
@@ -39,20 +39,14 @@ const Register = () => {
 
   return (
     <Form onFinish={onFinish} form={form} style={{ width: 240 }}>
-      <Form.Item
-        name="name"
-        rules={[{ required: true, message: "Vui lòng không để trống tên" }]}
-      >
-        <Input
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Họ tên"
-        />
+      <Form.Item name="name" rules={[{ required: true, message: 'Vui lòng không để trống tên' }]}>
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Họ tên" />
       </Form.Item>
       <Form.Item
         name="email"
         rules={[
-          { required: true, message: "Vui lòng không để trống email" },
-          { type: "email", message: "Định dạng email không đúng" },
+          { required: true, message: 'Vui lòng không để trống email' },
+          { type: 'email', message: 'Định dạng email không đúng' },
         ]}
       >
         <Input
@@ -67,10 +61,10 @@ const Register = () => {
         style={{ marginBottom: 4 }}
         name="password"
         rules={[
-          { required: true, message: "Vui lòng không để trống mật khẩu" },
+          { required: true, message: 'Vui lòng không để trống mật khẩu' },
           {
             min: 8,
-            message: "Mật khẩu phải có ít nhất 8 ký tự",
+            message: 'Mật khẩu phải có ít nhất 8 ký tự',
           },
           {
             validator: async (rule, value) => {
@@ -78,9 +72,7 @@ const Register = () => {
                 return await Promise.resolve();
               }
               if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-                return await Promise.reject(
-                  "Mật khẩu phải có ít nhất 1 chữ và một số"
-                );
+                return await Promise.reject('Mật khẩu phải có ít nhất 1 chữ và một số');
               }
               return await Promise.resolve();
             },
@@ -93,18 +85,14 @@ const Register = () => {
           placeholder="Mật khẩu"
         />
       </Form.Item>
-      {isError && (
-        <span style={{ color: "#ff4d4f", fontSize: 12 }}>
-          Đăng ký không thành công
-        </span>
-      )}
+      {isError && <span style={{ color: '#ff4d4f', fontSize: 12 }}>Đăng ký không thành công</span>}
       <Form.Item>
         <Button
           loading={isLoading}
           type="primary"
           htmlType="submit"
           className="login-form-button mt-2"
-          style={{ width: "100%" }}
+          style={{ width: '100%' }}
         >
           Đăng ký
         </Button>

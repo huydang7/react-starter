@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class ErrorBoundary extends React.Component<any, any> {
   constructor(props: any) {
@@ -19,15 +19,15 @@ class ErrorBoundary extends React.Component<any, any> {
         <div
           className="flex-center"
           style={{
-            flexDirection: "column",
+            flexDirection: 'column',
             padding: 64,
           }}
         >
           <h2>Something went wrong.</h2>
           <details
             style={{
-              whiteSpace: "pre-wrap",
-              overflowWrap: "anywhere",
+              whiteSpace: 'pre-wrap',
+              overflowWrap: 'anywhere',
             }}
           >
             {this.state.error && this.state.error.toString()}

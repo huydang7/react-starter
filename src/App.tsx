@@ -1,14 +1,16 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import ErrorBoundary from "containers/ErrorBoundary";
-import InitState from "containers/InitState";
-import AppRoute from "routes";
-import "styles/index.scss";
-import "antd/dist/reset.css";
-import { ConfigProvider } from "antd";
-import { BrowserRouter } from "react-router-dom";
-import { Suspense } from "react";
-import LoadingScreen from "components/LoadingScreen";
-import { theme } from "shared/theme";
+import { Suspense } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ConfigProvider } from 'antd';
+import ErrorBoundary from 'containers/ErrorBoundary';
+import InitState from 'containers/InitState';
+import AppRoute from 'routes';
+import { theme } from 'shared/theme';
+
+import LoadingScreen from 'components/LoadingScreen';
+
+import 'styles/index.scss';
+import 'antd/dist/reset.css';
 
 const queryClient = new QueryClient();
 

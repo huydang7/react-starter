@@ -1,16 +1,17 @@
-import { Spin } from "antd";
-import React from "react";
-import Logo from "./Logo";
+import React from 'react';
+import { Spin } from 'antd';
+
+import Logo from './Logo';
 
 const LoadingScreen = () => {
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100%",
-        flexDirection: "column",
-        position: "fixed",
-        background: "white",
+        width: '100vw',
+        height: '100%',
+        flexDirection: 'column',
+        position: 'fixed',
+        background: 'white',
         zIndex: 9999,
       }}
       className="flex-center"

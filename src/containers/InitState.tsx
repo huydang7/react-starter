@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { useAuthStore } from "stores/auth";
-import LoadingScreen from "components/LoadingScreen";
-import { makeRequest } from "shared/utils";
-import { getMe } from "apis/auth";
-import { shallow } from "zustand/shallow";
+import { useEffect, useState } from 'react';
+import { getMe } from 'apis/auth';
+import { makeRequest } from 'shared/utils';
+import { useAuthStore } from 'stores/auth';
+import { shallow } from 'zustand/shallow';
+
+import LoadingScreen from 'components/LoadingScreen';
 
 const useHydration = () => {
   const [hydrated, setHydrated] = useState(useAuthStore.persist.hasHydrated);

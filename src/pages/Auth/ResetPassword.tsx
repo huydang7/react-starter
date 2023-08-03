@@ -1,19 +1,14 @@
-import { LockOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
-import { Link, Navigate, useLocation } from "react-router-dom";
-import { useResetPassword } from "hooks/useAuthQuery";
+import { Link, Navigate, useLocation } from 'react-router-dom';
+import { LockOutlined } from '@ant-design/icons';
+import { Button, Form, Input } from 'antd';
+import { useResetPassword } from 'hooks/useAuthQuery';
 
 const ResetPassword = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const token = params.get("token");
+  const token = params.get('token');
 
-  const {
-    mutate: resetPassword,
-    isLoading,
-    isError,
-    isSuccess,
-  } = useResetPassword();
+  const { mutate: resetPassword, isLoading, isError, isSuccess } = useResetPassword();
   const onFinish = (values: any) => {
     delete values.newPassword;
     resetPassword({ ...values, token });
@@ -27,9 +22,7 @@ const ResetPassword = () => {
     <Form onFinish={onFinish} style={{ width: 240 }}>
       <Form.Item
         name="password"
-        rules={[
-          { required: true, message: "Vui lòng không để trống mật khẩu" },
-        ]}
+        rules={[{ required: true, message: 'Vui lòng không để trống mật khẩu' }]}
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
@@ -40,9 +33,7 @@ const ResetPassword = () => {
       <Form.Item
         style={{ marginBottom: 4 }}
         name="newPassword"
-        rules={[
-          { required: true, message: "Vui lòng không để trống mật khẩu" },
-        ]}
+        rules={[{ required: true, message: 'Vui lòng không để trống mật khẩu' }]}
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
@@ -51,9 +42,7 @@ const ResetPassword = () => {
         />
       </Form.Item>
       {isError && (
-        <span style={{ color: "#ff4d4f", fontSize: 12 }}>
-          Không thể đặt lại mật khẩu
-        </span>
+        <span style={{ color: '#ff4d4f', fontSize: 12 }}>Không thể đặt lại mật khẩu</span>
       )}
       <Form.Item>
         <Button
@@ -61,7 +50,7 @@ const ResetPassword = () => {
           type="primary"
           htmlType="submit"
           className="login-form-button mt-2"
-          style={{ width: "100%" }}
+          style={{ width: '100%' }}
         >
           Đặt lại mật khẩu
         </Button>
