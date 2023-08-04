@@ -7,7 +7,6 @@ export const queryClient = new QueryClient({
       notifyOnChangeProps: ['data', 'status'],
       retry: false,
       refetchOnWindowFocus: false,
-      enabled: false,
     },
   },
 });
