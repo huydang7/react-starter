@@ -7,7 +7,7 @@ export enum TokenType {
 
 export interface IToken {
   id: string;
-  token: string;
+  value: string;
   userId: string;
   type: TokenType;
   expires: string;

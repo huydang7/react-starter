@@ -5,7 +5,7 @@ import * as AuthService from './auth';
 import { configs } from './config';
 
 const requestAuthInterceptor = (config: InternalAxiosRequestConfig) => {
-  const token = useAuthStore.getState().tokens?.access.token;
+  const token = useAuthStore.getState().tokens?.access.value;
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
     return config;

@@ -21,7 +21,7 @@ export const useGetUser = (id: string) => {
 };
 
 export const useCreateUser = () => {
-  return useMutation((payload: Omit<IUser, 'id'>) => createUser(payload), {
+  return useMutation(createUser, {
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ['getUsers'] });
     },
@@ -40,7 +40,7 @@ export const useUpdateUser = () => {
 };
 
 export const useDeteleUser = () => {
-  return useMutation((id: string) => deleteUser(id), {
+  return useMutation(deleteUser, {
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ['getUsers'] });
     },

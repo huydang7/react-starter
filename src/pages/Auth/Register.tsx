@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { useCheckEmail, useRegister } from 'hooks/useAuthQuery';
-import _ from 'lodash';
+import { debounce } from 'lodash';
 
-const debounced = _.debounce((callback) => {
+const debounced = debounce((callback) => {
   return callback();
 }, 500);
 

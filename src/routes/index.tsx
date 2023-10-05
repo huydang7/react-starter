@@ -17,7 +17,7 @@ const AppRoute = () => {
       </Route>
       <Route element={<AuthGuard children={<MainLayout />} />}>
         <Route path="/" element={<></>} />
-        <Route path="user" element={<UserRoutes />} />
+        <Route path="user/*" element={<UserRoutes />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

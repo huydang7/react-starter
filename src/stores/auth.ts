@@ -1,45 +1,59 @@
-import produce from 'immer';
 import { AuthTokenInfo } from 'interfaces/token';
 import { IUser } from 'interfaces/user';
-import { create, StateCreator } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 export type AuthState = {
-  currentUser: null | IUser;
+  currentUser: IUser | null;
   tokens: AuthTokenInfo | null;
+  _hydrated: boolean;
+};
+
+export type AuthAction = {
   setUserAndTokens: (payload: { user: IUser; tokens: AuthTokenInfo }) => void;
   setUser: (user: IUser) => void;
   logOut: () => void;
+  _setHydrated: (state: boolean) => void;
 };
 
-export const store: StateCreator<AuthState> = (set) => ({
+export const store = immer<AuthState & AuthAction>((set) => ({
   currentUser: null,
   tokens: null,
+  _hydrated: false,
   setUserAndTokens: (payload: { user: IUser; tokens: AuthTokenInfo }) =>
-    set(
-      produce((state: AuthState) => {
-        state.currentUser = payload.user;
-        state.tokens = payload.tokens;
-      })
-    ),
+    set((state: AuthState) => {
+      state.currentUser = payload.user;
+      state.tokens = payload.tokens;
+    }),
   setUser: (user: IUser) =>
-    set(
-      produce((state: AuthState) => {
-        state.currentUser = user;
-      })
-    ),
+    set((state: AuthState) => {
+      state.currentUser = user;
+    }),
   logOut: () =>
-    set(
-      produce((state: AuthState) => {
-        state.currentUser = null;
-        state.tokens = null;
-      })
-    ),
-});
+    set((state: AuthState) => {
+      state.currentUser = null;
+      state.tokens = null;
+    }),
+  _setHydrated: (value: boolean) => {
+    set((state: AuthState) => {
+      state._hydrated = value;
+    });
+  },
+}));
 
-export const useAuthStore = create<AuthState>()(
+export const useAuthStore = createWithEqualityFn<AuthState & AuthAction>()(
   persist(store, {
     name: 'auth-storage',
-    getStorage: () => localStorage,
+    storage: createJSONStorage(() => localStorage),
+    onRehydrateStorage() {
+      return (state, error) => {
+        if (error) {
+          console.log('an error happened during hydration', error);
+        } else {
+          state?._setHydrated(true);
+        }
+      };
+    },
   })
 );
