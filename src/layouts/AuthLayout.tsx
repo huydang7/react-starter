@@ -6,10 +6,9 @@ import Logo from 'components/Logo';
 
 const AuthLayout = () => {
   return (
-    <Row justify="center" style={{ alignItems: 'center', height: '100%', background: '#f5f5f5' }}>
+    <Row justify="center" style={{ alignItems: 'center', height: '100%' }}>
       <div
         style={{
-          backgroundColor: 'white',
           padding: 36,
           borderRadius: 6,
           maxWidth: 540,

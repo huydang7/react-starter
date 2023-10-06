@@ -6,6 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
+
+  &.dark-mode {
+    background-color: $dark-background;
+    color: $dark-text;
+  }
 }
 
 code {
@@ -16,3 +21,4 @@ code {
 #root {
   height: 100%;
 }
+

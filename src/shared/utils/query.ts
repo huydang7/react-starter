@@ -4,9 +4,10 @@ import { AxiosResponse } from 'axios';
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      notifyOnChangeProps: ['data', 'status'],
+      notifyOnChangeProps: ['data', 'fetchStatus'],
       retry: false,
       refetchOnWindowFocus: false,
+      keepPreviousData: true,
     },
   },
 });
@@ -26,7 +27,7 @@ export type PrettifyResult<T> = {
 } & Omit<FortmattedQueryResult, 'data'>;
 
 export type PrettifyQueryManyResult<T> = {
-  rows: T[];
+  items: T[];
   total: number;
   loading: boolean;
 } & Omit<FortmattedQueryResult, 'data'>;
@@ -36,7 +37,7 @@ export const prettifyQueryResult = <T = any>(result: FortmattedQueryResult): Pre
 
   return {
     result: axiosResponse?.data?.result,
-    loading: rest.status === 'loading',
+    loading: rest.fetchStatus === 'fetching',
     ...rest,
   };
 };
@@ -47,9 +48,9 @@ export const prettifyQueryManyResult = <T = any>(
   const { data: axiosResponse, ...rest } = queryResult;
 
   return {
-    rows: axiosResponse?.data?.result?.rows || [],
-    total: axiosResponse?.data?.result?.count || 0,
-    loading: rest.status === 'loading',
+    items: axiosResponse?.data?.result?.data || [],
+    total: axiosResponse?.data?.result?.meta?.itemCount || 0,
+    loading: rest.fetchStatus === 'fetching',
     ...rest,
   };
 };

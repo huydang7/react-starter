@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, notification } from 'antd';
 import { useCheckEmail, useRegister } from 'hooks/useAuthQuery';
 import { debounce } from 'lodash';
 
@@ -11,14 +11,31 @@ const debounced = debounce((callback) => {
 
 const Register = () => {
   const navigate = useNavigate();
-  const { mutateAsync: register, isLoading, isError } = useRegister();
+  const { mutateAsync: register, isLoading } = useRegister();
   const checkEmail = useCheckEmail();
   const [form] = Form.useForm();
 
   const onFinish = async (values: any) => {
-    const result = await register(values);
-    if (result) {
-      navigate(`/auth/login?isRegisterSuccess=true&email=${values.email}`);
+    try {
+      const result = await register(values);
+      if (result) {
+        navigate(`/auth/login?isRegisterSuccess=true&email=${values.email}`);
+      }
+    } catch (error: any) {
+      const errCode = error?.response?.data?.errorCode;
+      if (errCode === 100) {
+        const currentErrors = form.getFieldError('email');
+        form.setFields([
+          {
+            name: 'email',
+            errors: [...currentErrors, 'Email đã được sử dụng'],
+          },
+        ]);
+      } else {
+        notification.error({
+          message: 'Đăng ký không thành công',
+        });
+      }
     }
   };
 
@@ -85,7 +102,6 @@ const Register = () => {
           placeholder="Mật khẩu"
         />
       </Form.Item>
-      {isError && <span style={{ color: '#ff4d4f', fontSize: 12 }}>Đăng ký không thành công</span>}
       <Form.Item>
         <Button
           loading={isLoading}

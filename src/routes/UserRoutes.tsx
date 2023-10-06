@@ -1,9 +1,10 @@
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+const User = React.lazy(() => import('pages/User'));
 
 const UserRoutes = () => (
   <Routes>
-    <Route path="/" element={<Navigate to="profile" replace />} />
+    <Route path="/" element={<User />} />
     <Route path="profile" element={<></>} />
   </Routes>
 );

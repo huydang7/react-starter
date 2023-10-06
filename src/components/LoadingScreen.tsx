@@ -11,7 +11,6 @@ const LoadingScreen = () => {
         height: '100%',
         flexDirection: 'column',
         position: 'fixed',
-        background: 'white',
         zIndex: 9999,
       }}
       className="flex-center"
