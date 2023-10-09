@@ -1,12 +1,13 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import lazyRetry from 'shared/utils/lazy-retry';
 import { useAuthStore } from 'stores/auth';
 import { shallow } from 'zustand/shallow';
 
-const Login = React.lazy(() => import('pages/Auth/Login'));
-const Register = React.lazy(() => import('pages/Auth/Register'));
-const ForgotPassword = React.lazy(() => import('pages/Auth/ForgotPassword'));
-const ResetPassword = React.lazy(() => import('pages/Auth/ResetPassword'));
+const Login = lazyRetry(() => import('pages/Auth/Login'));
+const Register = lazyRetry(() => import('pages/Auth/Register'));
+const ForgotPassword = lazyRetry(() => import('pages/Auth/ForgotPassword'));
+const ResetPassword = lazyRetry(() => import('pages/Auth/ResetPassword'));
 
 const AuthRoutes = () => {
   const user = useAuthStore((state) => state.currentUser, shallow);
