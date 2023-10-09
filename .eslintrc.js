@@ -4,6 +4,7 @@ module.exports = {
     "@typescript-eslint/eslint-plugin",
     "simple-import-sort",
     "unused-imports",
+    "prettier"
   ],
   extends: [
     "plugin:@typescript-eslint/recommended",
