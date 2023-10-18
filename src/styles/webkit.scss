@@ -6,10 +6,9 @@ textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-  box-shadow: 0 0 0px 1000px #fff inset;
-  transition: background-color 5000s ease-in-out 0s;
+select:-webkit-autofill:focus
+{
+  transition: background-color 0s 600000s, color 0s 600000s;
 }
 
 ::-webkit-scrollbar {
