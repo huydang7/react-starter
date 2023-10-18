@@ -17,7 +17,17 @@ module.exports = {
   },
   ignorePatterns: [".eslintrc.js"],
   rules: {
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+    "prettier/prettier": [
+      "error",
+      {
+        bracketSameLine: false,
+        singleQuote: true,
+        trailingComma: "es5",
+        semi: true,
+        arrowParens: "always",
+        printWidth: 100,
+      },
+    ],
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
