@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
-import { useThemeStore } from 'stores/theme';
+
+import { useThemeStore } from '@/stores/theme';
 
 const ToggleThemeButton = () => {
   const { darkMode, toggleTheme } = useThemeStore();

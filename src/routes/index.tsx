@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AuthLayout from 'layouts/AuthLayout';
-import MainLayout from 'layouts/MainLayout';
+
+import AuthLayout from '@/layouts/AuthLayout';
+import MainLayout from '@/layouts/MainLayout';
 
 import AuthGuard from './AuthGuard';
 import AuthRoutes from './AuthRoutes';
 import UserRoutes from './UserRoutes';
 
-const NotFound = React.lazy(() => import('pages/404'));
+const NotFound = React.lazy(() => import('@/pages/404'));
 
 const AppRoute = () => {
   return (

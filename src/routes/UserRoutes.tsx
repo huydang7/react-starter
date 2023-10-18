@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import lazyRetry from 'shared/utils/lazy-retry';
-const User = lazyRetry(() => import('pages/User'));
+
+import lazyRetry from '@/shared/utils/lazy-retry';
+const User = lazyRetry(() => import('@/pages/User'));
 
 const UserRoutes = () => (
   <Routes>

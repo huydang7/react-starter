@@ -1,7 +1,8 @@
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { LockOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
-import { useResetPassword } from 'hooks/useAuthQuery';
+
+import { useResetPassword } from '@/hooks/useAuthQuery';
 
 const ResetPassword = () => {
   const location = useLocation();

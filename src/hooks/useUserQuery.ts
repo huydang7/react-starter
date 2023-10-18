@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { createUser, deleteUser, getUser, getUsers, updateUser } from 'apis/user';
-import { IGetUsersQuery, IUser } from 'interfaces/user';
-import { prettifyQueryManyResult, prettifyQueryResult } from 'shared/utils';
+
+import { createUser, deleteUser, getUser, getUsers, updateUser } from '@/apis/user';
+import { IGetUsersQuery, IUser } from '@/interfaces/user';
+import { prettifyQueryManyResult, prettifyQueryResult } from '@/shared/utils';
 
 export const useGetUsers = (query: IGetUsersQuery) => {
   const result = useQuery(['getUsers', query], () => getUsers(query), {

@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { useAuthStore } from 'stores/auth';
+
+import { useAuthStore } from '@/stores/auth';
 
 import * as AuthService from './auth';
 import { configs } from './config';

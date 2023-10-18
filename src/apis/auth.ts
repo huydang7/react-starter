@@ -1,4 +1,4 @@
-import request from 'services/http';
+import request from '@/services/http';
 
 export const login = (payload: { emailL: string; password: string }) => {
   return request.post('/auth/login', payload);

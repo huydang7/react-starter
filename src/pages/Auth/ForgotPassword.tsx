@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Row } from 'antd';
-import { useForgotPassword } from 'hooks/useAuthQuery';
+
+import { useForgotPassword } from '@/hooks/useAuthQuery';
 
 const ForgotPassword = () => {
   const { mutate: forgotPassword, isSuccess, isError, isLoading } = useForgotPassword();

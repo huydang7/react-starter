@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { Form, Input, InputNumber, Modal, notification, Select } from 'antd';
-import { useCreateUser, useUpdateUser } from 'hooks/useUserQuery';
-import { Role } from 'interfaces/user';
-import { enumToArray } from 'shared/utils/helpers';
+
+import { useCreateUser, useUpdateUser } from '@/hooks/useUserQuery';
+import { Role } from '@/interfaces/user';
+import { enumToArray } from '@/shared/utils/helpers';
 
 const layout = {
   labelCol: { span: 24 },

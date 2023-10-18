@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, Input, Popconfirm, Space, Tag } from 'antd';
 import dayjs from 'dayjs';
-import { useDeteleUser, useGetUsers } from 'hooks/useUserQuery';
-import { Role } from 'interfaces/user';
-import { useAuthStore } from 'stores/auth';
 
-import TitleWithAction from 'components/TitleWithAction';
-import Table from 'components/ui/Table';
+import TitleWithAction from '@/components/TitleWithAction';
+import Table from '@/components/ui/Table';
+import { useDeteleUser, useGetUsers } from '@/hooks/useUserQuery';
+import { Role } from '@/interfaces/user';
+import { useAuthStore } from '@/stores/auth';
 
 import CreateUserModal from './CreateUserModal';
 

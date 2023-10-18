@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getMe } from 'apis/auth';
-import { makeRequest } from 'shared/utils';
-import { useAuthStore } from 'stores/auth';
 import { shallow } from 'zustand/shallow';
 
-import LoadingScreen from 'components/LoadingScreen';
+import { getMe } from '@/apis/auth';
+import LoadingScreen from '@/components/LoadingScreen';
+import { makeRequest } from '@/shared/utils';
+import { useAuthStore } from '@/stores/auth';
 
 const InitState = (props: { children: JSX.Element }) => {
   const { tokens, setUser, hydrated } = useAuthStore(

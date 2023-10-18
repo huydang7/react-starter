@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { ConfigProvider } from 'antd';
-import { darkTheme, lightTheme } from 'shared/theme';
-import { useThemeStore } from 'stores/theme';
+
+import { darkTheme, lightTheme } from '@/shared/theme';
+import { useThemeStore } from '@/stores/theme';
 
 const ThemeWrapper = (props: { children: React.ReactNode }) => {
   const { darkMode } = useThemeStore();

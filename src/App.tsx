@@ -1,14 +1,14 @@
 import { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ErrorBoundary from 'containers/ErrorBoundary';
-import InitState from 'containers/InitState';
-import AppRoute from 'routes';
 
-import LoadingScreen from 'components/LoadingScreen';
-import ThemeWrapper from 'components/ThemeWrapper';
+import LoadingScreen from '@/components/LoadingScreen';
+import ErrorBoundary from '@/containers/ErrorBoundary';
+import InitState from '@/containers/InitState';
+import ThemeWrapper from '@/containers/ThemeWrapper';
+import AppRoute from '@/routes';
 
-import 'styles/index.scss';
+import '@/styles/index.scss';
 import 'antd/dist/reset.css';
 
 const queryClient = new QueryClient();

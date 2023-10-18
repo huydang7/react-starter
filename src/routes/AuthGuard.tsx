@@ -1,7 +1,8 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { Role } from 'interfaces/user';
-import { useAuthStore } from 'stores/auth';
 import { shallow } from 'zustand/shallow';
+
+import { Role } from '@/interfaces/user';
+import { useAuthStore } from '@/stores/auth';
 
 const AuthGuard = ({ children, roles }: { children: JSX.Element; roles?: Role[] }) => {
   const user = useAuthStore((state) => state.currentUser, shallow);

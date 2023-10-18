@@ -1,8 +1,9 @@
-import { AuthTokenInfo } from 'interfaces/token';
-import { IUser } from 'interfaces/user';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { createWithEqualityFn } from 'zustand/traditional';
+
+import { AuthTokenInfo } from '@/interfaces/token';
+import { IUser } from '@/interfaces/user';
 
 export type AuthState = {
   currentUser: IUser | null;

@@ -1,6 +1,7 @@
-import { IGetUsersQuery, IUser } from 'interfaces/user';
 import { stringify } from 'qs';
-import request from 'services/http';
+
+import { IGetUsersQuery, IUser } from '@/interfaces/user';
+import request from '@/services/http';
 
 export const getUsers = (query: IGetUsersQuery) => {
   return request.get(`/user?${stringify(query)}`);

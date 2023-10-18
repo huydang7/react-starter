@@ -2,14 +2,14 @@ import { Suspense } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { DesktopOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Layout, Menu, Space, Spin } from 'antd';
-import { Role } from 'interfaces/user';
-import { HeaderHeight, SiderWidth } from 'shared/constants';
-import { useAuthStore } from 'stores/auth';
-import { useThemeStore } from 'stores/theme';
 import { shallow } from 'zustand/shallow';
 
-import Logo from 'components/Logo';
-import ToggleThemeButton from 'components/ToggleThemeButton';
+import Logo from '@/components/Logo';
+import ToggleThemeButton from '@/components/ToggleThemeButton';
+import { Role } from '@/interfaces/user';
+import { HeaderHeight, SiderWidth } from '@/shared/constants';
+import { useAuthStore } from '@/stores/auth';
+import { useThemeStore } from '@/stores/theme';
 
 import './MainLayout.scss';
 
