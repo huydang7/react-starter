@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 import TitleWithAction from '@/components/TitleWithAction';
 import Table from '@/components/ui/Table';
-import { useDeteleUser, useGetUsers } from '@/hooks/useUserQuery';
+import { useDeleteUser, useGetUsers } from '@/hooks/useUserQuery';
 import { Role } from '@/interfaces/user';
 import { useAuthStore } from '@/stores/auth';
 
@@ -24,8 +24,8 @@ const User = () => {
   const [editedUser, setEditedUser] = useState<any>(null);
   const [createUserModalVisible, setCreateUserModalVisible] = useState(false);
   const [query, setQuery] = useState<any>(initQuery);
-  const { total, items: users, loading } = useGetUsers(query);
-  const { mutate: deleteUser } = useDeteleUser();
+  const { total, items: users, isFetching } = useGetUsers(query);
+  const { mutate: deleteUser } = useDeleteUser();
   const { currentUser } = useAuthStore();
   const columns = [
     {
@@ -158,7 +158,7 @@ const User = () => {
 
           <Input.Search placeholder="Tìm kiếm" allowClear onSearch={onSearch} />
           <Table
-            loading={loading}
+            loading={isFetching}
             pagination={{
               current: query.page,
               pageSize: query.size,

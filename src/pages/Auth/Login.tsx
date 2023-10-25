@@ -11,7 +11,7 @@ const Login = () => {
   const isResetPwdSuccess = params.get('isResetPwdSuccess') === 'true';
 
   const email = params.get('email');
-  const { mutate: login, isLoading, isError } = useLogin();
+  const { mutate: login, isPending, isError } = useLogin();
 
   const onFinish = (values: any) => {
     login(values);
@@ -60,7 +60,7 @@ const Login = () => {
       </Form.Item>
       <Form.Item>
         <Button
-          loading={isLoading}
+          loading={isPending}
           type="primary"
           htmlType="submit"
           className="login-form-button mt-2"

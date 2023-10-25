@@ -13,8 +13,8 @@ const CreateUserModal = (props: any) => {
   const { visible, onClose, user } = props;
   const isEditMode = !!user;
   const [form] = Form.useForm();
-  const { mutateAsync: create, isLoading: createLoading } = useCreateUser();
-  const { mutateAsync: update, isLoading: updateLoading } = useUpdateUser();
+  const { mutateAsync: create, isPending: createLoading } = useCreateUser();
+  const { mutateAsync: update, isPending: updateLoading } = useUpdateUser();
 
   useEffect(() => {
     if (user) {

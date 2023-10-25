@@ -9,7 +9,7 @@ const ResetPassword = () => {
   const params = new URLSearchParams(location.search);
   const token = params.get('token');
 
-  const { mutate: resetPassword, isLoading, isError, isSuccess } = useResetPassword();
+  const { mutate: resetPassword, isPending, isError, isSuccess } = useResetPassword();
   const onFinish = (values: any) => {
     delete values.newPassword;
     resetPassword({ ...values, token });
@@ -47,7 +47,7 @@ const ResetPassword = () => {
       )}
       <Form.Item>
         <Button
-          loading={isLoading}
+          loading={isPending}
           type="primary"
           htmlType="submit"
           className="login-form-button mt-2"

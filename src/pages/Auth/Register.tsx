@@ -11,7 +11,7 @@ const debounced = debounce((callback) => {
 
 const Register = () => {
   const navigate = useNavigate();
-  const { mutateAsync: register, isLoading } = useRegister();
+  const { mutateAsync: register, isPending } = useRegister();
   const checkEmail = useCheckEmail();
   const [form] = Form.useForm();
 
@@ -104,7 +104,7 @@ const Register = () => {
       </Form.Item>
       <Form.Item>
         <Button
-          loading={isLoading}
+          loading={isPending}
           type="primary"
           htmlType="submit"
           className="login-form-button mt-2"

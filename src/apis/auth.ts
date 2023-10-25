@@ -1,6 +1,6 @@
 import request from '@/services/http';
 
-export const login = (payload: { emailL: string; password: string }) => {
+export const login = (payload: { email: string; password: string }) => {
   return request.post('/auth/login', payload);
 };
 

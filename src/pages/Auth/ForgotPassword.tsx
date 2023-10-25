@@ -5,7 +5,7 @@ import { Button, Form, Input, Row } from 'antd';
 import { useForgotPassword } from '@/hooks/useAuthQuery';
 
 const ForgotPassword = () => {
-  const { mutate: forgotPassword, isSuccess, isError, isLoading } = useForgotPassword();
+  const { mutate: forgotPassword, isSuccess, isError, isPending } = useForgotPassword();
 
   const onFinish = (values: any) => {
     forgotPassword(values);
@@ -39,7 +39,7 @@ const ForgotPassword = () => {
         )}
         <Form.Item>
           <Button
-            loading={isLoading}
+            loading={isPending}
             type="primary"
             htmlType="submit"
             className="login-form-button mt-2"
