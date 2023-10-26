@@ -30,15 +30,6 @@
     "lint": "eslint --fix --ext=.jsx,.js,.tsx,.ts . ",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "rules": {
-      "react-hooks/exhaustive-deps": "off"
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
