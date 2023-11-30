@@ -1,9 +1,9 @@
 ---
 to: src/apis/<%=h.changeCase.paramCase(name)%>.ts
 ---
-import { IGet<%=h.changeCase.pascalCase(name)%>sQuery, I<%=h.changeCase.pascalCase(name)%> } from "interfaces/<%=h.changeCase.paramCase(name)%>";
+import { IGet<%=h.changeCase.pascalCase(name)%>sQuery, I<%=h.changeCase.pascalCase(name)%> } from "@/interfaces/<%=h.changeCase.paramCase(name)%>";
 import { stringify } from "qs";
-import request from "services/http";
+import request from "@/services/http";
 
 export const get<%=h.changeCase.pascalCase(name)%>s = (query: IGet<%=h.changeCase.pascalCase(name)%>sQuery) => {
   return request.get(`/v1/<%=h.changeCase.paramCase(name)%>?${stringify(query)}`);
