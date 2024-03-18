@@ -11,6 +11,11 @@ export const lightTheme: ThemeConfig = {
     Layout: {
       headerBg: '#f5f5f5',
     },
+    Form: {
+      itemMarginBottom: 16,
+      verticalLabelPadding: '0 0 2px',
+      labelHeight: 24,
+    },
   },
 };
 

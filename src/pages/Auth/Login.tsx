@@ -18,7 +18,7 @@ const Login = () => {
   };
 
   return (
-    <Form onFinish={onFinish} style={{ width: 240 }}>
+    <Form onFinish={onFinish} style={{ width: 240 }} labelCol={{ span: 24 }} requiredMark={false}>
       {isRegisterSuccess && (
         <div className="flex-center mb-1">
           <Tag color="green">Bạn đã đăng ký thành công</Tag>
@@ -31,6 +31,7 @@ const Login = () => {
       )}
       <Form.Item
         initialValue={email}
+        label="Email"
         name="email"
         rules={[
           { required: true, message: 'Vui lòng không để trống email' },
@@ -40,7 +41,7 @@ const Login = () => {
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
       </Form.Item>
       <Form.Item
-        style={{ marginBottom: 4 }}
+        label="Password"
         name="password"
         rules={[{ required: true, message: 'Vui lòng không để trống mật khẩu' }]}
       >

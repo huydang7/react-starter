@@ -2,8 +2,8 @@
   "prettier.ignorePath": ".gitignore",
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.codeActionsOnSave": {
-    "source.addMissingImports": "explicit",
-    "source.fixAll.eslint": "explicit"
+    "source.addMissingImports": "always",
+    "source.fixAll.eslint": "always"
   },
   "[json][jsonc][yaml]": {
     "editor.formatOnSave": true,

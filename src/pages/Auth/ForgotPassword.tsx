@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Row } from 'antd';
 
@@ -6,22 +6,19 @@ import { useForgotPassword } from '@/hooks/useAuthQuery';
 
 const ForgotPassword = () => {
   const { mutate: forgotPassword, isSuccess, isError, isPending } = useForgotPassword();
-
+  const navigate = useNavigate();
   const onFinish = (values: any) => {
     forgotPassword(values);
   };
 
   if (isSuccess) {
-    return (
-      <span className="text-center">
-        Một thư đặt lại mật khẩu vừa được gửi tới địa chỉ email của bạn. Vui lòng kiểm tra email
-      </span>
-    );
+    navigate('/auth/reset-password');
   }
   return (
     <>
-      <Form onFinish={onFinish} style={{ width: 240 }}>
+      <Form onFinish={onFinish} style={{ width: 240 }} labelCol={{ span: 24 }} requiredMark={false}>
         <Form.Item
+          label="Email"
           name="email"
           rules={[
             { required: true, message: 'Vui lòng không để trống email' },

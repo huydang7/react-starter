@@ -55,11 +55,22 @@ const Register = () => {
   };
 
   return (
-    <Form onFinish={onFinish} form={form} style={{ width: 240 }}>
-      <Form.Item name="name" rules={[{ required: true, message: 'Vui lòng không để trống tên' }]}>
+    <Form
+      onFinish={onFinish}
+      form={form}
+      style={{ width: 240 }}
+      labelCol={{ span: 24 }}
+      requiredMark={false}
+    >
+      <Form.Item
+        label="Name"
+        name="name"
+        rules={[{ required: true, message: 'Vui lòng không để trống tên' }]}
+      >
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Họ tên" />
       </Form.Item>
       <Form.Item
+        label="Email"
         name="email"
         rules={[
           { required: true, message: 'Vui lòng không để trống email' },
@@ -75,7 +86,7 @@ const Register = () => {
         />
       </Form.Item>
       <Form.Item
-        style={{ marginBottom: 4 }}
+        label="Mật khẩu"
         name="password"
         rules={[
           { required: true, message: 'Vui lòng không để trống mật khẩu' },

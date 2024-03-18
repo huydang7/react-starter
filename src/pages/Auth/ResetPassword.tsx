@@ -1,18 +1,13 @@
-import { Link, Navigate, useLocation } from 'react-router-dom';
-import { LockOutlined } from '@ant-design/icons';
+import { Link, Navigate } from 'react-router-dom';
+import { CodeOutlined, LockOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 
 import { useResetPassword } from '@/hooks/useAuthQuery';
 
 const ResetPassword = () => {
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const token = params.get('token');
-
   const { mutate: resetPassword, isPending, isError, isSuccess } = useResetPassword();
   const onFinish = (values: any) => {
-    delete values.newPassword;
-    resetPassword({ ...values, token });
+    resetPassword({ ...values });
   };
 
   if (isSuccess) {
@@ -20,21 +15,39 @@ const ResetPassword = () => {
   }
 
   return (
-    <Form onFinish={onFinish} style={{ width: 240 }}>
+    <Form onFinish={onFinish} style={{ width: 240 }} labelCol={{ span: 24 }} requiredMark={false}>
       <Form.Item
-        name="password"
-        rules={[{ required: true, message: 'Vui lòng không để trống mật khẩu' }]}
+        label="OTP"
+        name="otp"
+        rules={[{ required: true, message: 'Vui lòng không để trống OTP' }]}
       >
         <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
+          prefix={<CodeOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Mật khẩu"
         />
       </Form.Item>
       <Form.Item
-        style={{ marginBottom: 4 }}
+        label="Mật khẩu mới"
         name="newPassword"
-        rules={[{ required: true, message: 'Vui lòng không để trống mật khẩu' }]}
+        rules={[
+          { required: true, message: 'Vui lòng không để trống mật khẩu' },
+          {
+            min: 8,
+            message: 'Mật khẩu phải có ít nhất 8 ký tự',
+          },
+          {
+            validator: async (rule, value) => {
+              if (!value) {
+                return await Promise.resolve();
+              }
+              if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+                return await Promise.reject('Mật khẩu phải có ít nhất 1 chữ và một số');
+              }
+              return await Promise.resolve();
+            },
+          },
+        ]}
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
