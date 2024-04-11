@@ -27,7 +27,7 @@
     "prepare": "husky install",
     "postinstall": "husky install",
     "lint": "eslint --fix --ext=.jsx,.js,.tsx,.ts . ",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
+    "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "browserslist": {
     "production": [
