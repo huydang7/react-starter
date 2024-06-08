@@ -5,10 +5,10 @@ import { shallow } from 'zustand/shallow';
 import lazyRetry from '@/shared/utils/lazy-retry';
 import { useAuthStore } from '@/stores/auth';
 
-const Login = lazyRetry(() => import('@/pages/Auth/Login'));
-const Register = lazyRetry(() => import('@/pages/Auth/Register'));
-const ForgotPassword = lazyRetry(() => import('@/pages/Auth/ForgotPassword'));
-const ResetPassword = lazyRetry(() => import('@/pages/Auth/ResetPassword'));
+const Login = lazyRetry(() => import('@/pages/auth/login'));
+const Register = lazyRetry(() => import('@/pages/auth/register'));
+const ForgotPassword = lazyRetry(() => import('@/pages/auth/forgot-password'));
+const ResetPassword = lazyRetry(() => import('@/pages/auth/reset-password'));
 
 const AuthRoutes = () => {
   const user = useAuthStore((state) => state.currentUser, shallow);

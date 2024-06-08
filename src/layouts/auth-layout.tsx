@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Row, Spin } from 'antd';
 
-import Logo from '@/components/Logo';
+import Logo from '@/components/logo';
 
 const AuthLayout = () => {
   return (

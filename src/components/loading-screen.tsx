@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spin } from 'antd';
 
-import Logo from './Logo';
+import Logo from './logo';
 
 const LoadingScreen = () => {
   return (

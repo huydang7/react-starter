@@ -3,7 +3,7 @@ import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, notification } from 'antd';
 import { debounce } from 'lodash';
 
-import { useCheckEmail, useRegister } from '@/hooks/useAuthQuery';
+import { useCheckEmail, useRegister } from '@/hooks/use-auth-query';
 
 const debounced = debounce((callback) => {
   return callback();

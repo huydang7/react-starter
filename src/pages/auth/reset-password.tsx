@@ -2,7 +2,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { CodeOutlined, LockOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 
-import { useResetPassword } from '@/hooks/useAuthQuery';
+import { useResetPassword } from '@/hooks/use-auth-query';
 
 const ResetPassword = () => {
   const { mutate: resetPassword, isPending, isError, isSuccess } = useResetPassword();

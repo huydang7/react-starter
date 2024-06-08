@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Tag } from 'antd';
 
-import { useLogin } from '@/hooks/useAuthQuery';
+import { useLogin } from '@/hooks/use-auth-query';
 
 const Login = () => {
   const location = useLocation();

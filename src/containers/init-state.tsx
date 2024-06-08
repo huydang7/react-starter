@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { shallow } from 'zustand/shallow';
 
 import { getMe } from '@/apis/auth';
-import LoadingScreen from '@/components/LoadingScreen';
+import LoadingScreen from '@/components/loading-screen';
 import { makeRequest } from '@/shared/utils';
 import { useAuthStore } from '@/stores/auth';
 

@@ -3,13 +3,13 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, Input, Popconfirm, Space, Tag } from 'antd';
 import dayjs from 'dayjs';
 
-import TitleWithAction from '@/components/TitleWithAction';
+import TitleWithAction from '@/components/title-with-action';
 import Table from '@/components/ui/Table';
-import { useDeleteUser, useGetUsers } from '@/hooks/useUserQuery';
+import { useDeleteUser, useGetUsers } from '@/hooks/use-user-query';
 import { Role } from '@/interfaces/user';
 import { useAuthStore } from '@/stores/auth';
 
-import CreateUserModal from './CreateUserModal';
+import CreateUserModal from './create-user-modal';
 
 const initQuery = {
   page: 1,

@@ -4,14 +4,14 @@ import { DesktopOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Layout, Menu, Space, Spin } from 'antd';
 import { shallow } from 'zustand/shallow';
 
-import Logo from '@/components/Logo';
-import ToggleThemeButton from '@/components/ToggleThemeButton';
+import Logo from '@/components/logo';
+import ToggleThemeButton from '@/components/toggle-theme-button';
 import { Role } from '@/interfaces/user';
 import { HeaderHeight, SiderWidth } from '@/shared/constants';
 import { useAuthStore } from '@/stores/auth';
 import { useThemeStore } from '@/stores/theme';
 
-import './MainLayout.scss';
+import './main-layout.scss';
 
 const { Header, Sider } = Layout;
 

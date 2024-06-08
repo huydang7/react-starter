@@ -1,1 +1,1 @@
-export { default } from './components/User';
+export { default } from './components/user';
