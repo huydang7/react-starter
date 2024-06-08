@@ -4,7 +4,7 @@ import { Button, Input, Popconfirm, Space, Tag } from 'antd';
 import dayjs from 'dayjs';
 
 import TitleWithAction from '@/components/title-with-action';
-import Table from '@/components/ui/Table';
+import Table from '@/components/ui/table';
 import { useDeleteUser, useGetUsers } from '@/hooks/use-user-query';
 import { Role } from '@/interfaces/user';
 import { useAuthStore } from '@/stores/auth';
