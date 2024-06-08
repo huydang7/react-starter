@@ -1,5 +1,5 @@
 ---
-to: src/apis/<%=h.changeCase.paramCase(name)%>.ts
+to: src/apis/<%=h.changeCase.kebabCase(name)%>.ts
 ---
 import { IGet<%=h.changeCase.pascalCase(name)%>sQuery, I<%=h.changeCase.pascalCase(name)%> } from "@/interfaces/<%=h.changeCase.paramCase(name)%>";
 import { stringify } from "qs";

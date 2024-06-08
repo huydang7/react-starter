@@ -1,5 +1,5 @@
 ---
-to: src/hooks/use<%=h.changeCase.pascalCase(name)%>Query.ts
+to: src/hooks/use-<%=h.changeCase.kebab(name)%>-query.ts
 ---
 <%
   getManyName = h.changeCase.pascalCase(name) + 's'

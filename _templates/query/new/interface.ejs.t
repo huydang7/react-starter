@@ -1,5 +1,5 @@
 ---
-to: src/interfaces/<%=h.changeCase.paramCase(name)%>.ts
+to: src/interfaces/<%=h.changeCase.kebab(name)%>.ts
 ---
 
 import { ITimestamp, IPaginationQuery } from './base';
