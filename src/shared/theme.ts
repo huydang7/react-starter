@@ -17,6 +17,7 @@ export const lightTheme: ThemeConfig = {
       labelHeight: 24,
     },
   },
+  cssVar: true,
 };
 
 export const darkTheme: ThemeConfig = {
@@ -37,4 +38,5 @@ export const darkTheme: ThemeConfig = {
     },
   },
   algorithm: antdTheme.darkAlgorithm,
+  cssVar: true,
 };

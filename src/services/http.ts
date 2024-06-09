@@ -3,7 +3,7 @@ import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { useAuthStore } from '@/stores/auth';
 
 import * as AuthService from './auth';
-import { configs } from './config';
+import { CONFIGS } from './config';
 
 const requestAuthInterceptor = (config: InternalAxiosRequestConfig) => {
   const token = useAuthStore.getState().tokens?.access.value;
@@ -26,7 +26,7 @@ const responseFulfilledInterceptor = (response: AxiosResponse<any, any>) => {
 };
 
 const instance = axios.create({
-  baseURL: configs.apiURL,
+  baseURL: CONFIGS.API_URL,
 });
 
 instance.interceptors.request.use(requestAuthInterceptor);
