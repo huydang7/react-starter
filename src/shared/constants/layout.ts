@@ -1,2 +1,2 @@
-export const HeaderHeight = 56;
-export const SiderWidth = 240;
+export const HEADER_HEIGHT = 56;
+export const SIDER_WIDTH = 240;

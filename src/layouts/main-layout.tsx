@@ -7,7 +7,7 @@ import { shallow } from 'zustand/shallow';
 import Logo from '@/components/logo';
 import ToggleThemeButton from '@/components/toggle-theme-button';
 import { Role } from '@/interfaces/user';
-import { HeaderHeight, SiderWidth } from '@/shared/constants';
+import { HEADER_HEIGHT, SIDER_WIDTH } from '@/shared/constants';
 import { useAuthStore } from '@/stores/auth';
 import { useThemeStore } from '@/stores/theme';
 
@@ -57,18 +57,18 @@ const MainLayout = () => {
 
   return (
     <Layout style={{ height: '100%' }} className="main-layout">
-      <Sider className="sider" theme={darkMode ? 'dark' : 'light'} width={SiderWidth}>
+      <Sider className="sider" theme={darkMode ? 'dark' : 'light'} width={SIDER_WIDTH}>
         <div className="flex-center" style={{ height: 150 }}>
           <Logo />
         </div>
         <Menu style={{ borderRight: 0, marginTop: 20 }} items={renderMenu()} />
       </Sider>
-      <Layout style={{ marginLeft: SiderWidth }}>
+      <Layout style={{ marginLeft: SIDER_WIDTH }}>
         <Header
           className="header"
           style={{
-            left: SiderWidth,
-            height: HeaderHeight,
+            left: SIDER_WIDTH,
+            height: HEADER_HEIGHT,
           }}
         >
           <div></div>
@@ -87,7 +87,7 @@ const MainLayout = () => {
             </Dropdown>
           </Space>
         </Header>
-        <Layout style={{ marginTop: HeaderHeight }}>
+        <Layout style={{ marginTop: HEADER_HEIGHT }}>
           <div
             style={{
               margin: 0,

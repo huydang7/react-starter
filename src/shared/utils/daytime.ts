@@ -4,9 +4,10 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import localeData from 'dayjs/plugin/localeData';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 
+import 'dayjs/locale/vi';
+
 dayjs.extend(customParseFormat);
 dayjs.extend(localizedFormat);
 dayjs.extend(localeData);
 
-require('dayjs/locale/vi');
 dayjs.locale('vi');
