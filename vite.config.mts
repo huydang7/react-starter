@@ -13,6 +13,13 @@ const configs = ({ mode }) => {
     build: {
       outDir: 'build',
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern',
+        },
+      },
+    },
   });
 };
 
